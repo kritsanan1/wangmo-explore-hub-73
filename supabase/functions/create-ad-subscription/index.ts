@@ -96,7 +96,7 @@ serve(async (req) => {
               description: `Monthly advertising subscription for ${advertisement_data.business_name}` 
             },
             unit_amount: selectedPlan.amount,
-            recurring: { interval: "month" },
+            recurring: { interval: billing_cycle === "yearly" ? "year" : "month" },
           },
           quantity: 1,
         },
