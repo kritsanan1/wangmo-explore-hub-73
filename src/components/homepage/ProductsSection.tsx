@@ -240,4 +240,4 @@ const ProductsSection = () => {
   );
 };
 
-export default ProductsSection;
+export default memo(ProductsSection);
