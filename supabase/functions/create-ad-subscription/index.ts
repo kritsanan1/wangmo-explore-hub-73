@@ -130,7 +130,7 @@ serve(async (req) => {
         plan_type: plan_type,
         status: "pending", // Will be activated after payment
         start_date: new Date().toISOString(),
-        end_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days from now
+        end_date: new Date(Date.now() + (billing_cycle === "yearly" ? 365 : 30) * 24 * 60 * 60 * 1000).toISOString() // 30 days or 365 days
       })
       .select()
       .single();
