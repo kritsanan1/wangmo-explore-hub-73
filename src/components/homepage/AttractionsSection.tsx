@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Star, Camera } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import OptimizedImage from "@/components/ui/optimized-image";
 import SectionHeader from "./SectionHeader";
 
 type Attraction = {
@@ -120,10 +121,13 @@ const AttractionsSection = () => {
           {attractions.map((attraction) => (
             <Card key={attraction.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
               <div className="relative h-48 overflow-hidden">
-                <img
+                <OptimizedImage
                   src={attraction.images[0] || '/placeholder.svg'}
                   alt={attraction.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  width={400}
+                  height={300}
+                  lazy={true}
                 />
                 <div className="absolute top-3 right-3">
                   <Badge className="bg-white/90 text-foreground">
