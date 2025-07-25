@@ -23,6 +23,7 @@ type Product = {
     address: string;
   };
   featured: boolean;
+  price?: number; // Add price for cart functionality
 };
 
 const ProductsSection = () => {
