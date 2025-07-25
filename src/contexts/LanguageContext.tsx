@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 
 type Language = 'en' | 'th';
 
@@ -53,7 +53,7 @@ const translations = {
   },
   th: {
     // Navigation
-    'nav.home': 'หน้าแรก',
+    'nav.home': 'หน้าแร��',
     'nav.attractions': 'สถานที่ท่องเที่ยว',
     'nav.restaurants': 'ร้านอาหาร',
     'nav.services': 'บริการ',
@@ -107,18 +107,26 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const toggleLanguage = () => {
+  // Memoized functions for better performance
+  const toggleLanguage = useCallback(() => {
     const newLanguage = language === 'en' ? 'th' : 'en';
     setLanguage(newLanguage);
     localStorage.setItem('wangsammo-language', newLanguage);
-  };
+  }, [language]);
 
-  const t = (key: string): string => {
+  const t = useCallback((key: string): string => {
     return translations[language][key as keyof typeof translations['en']] || key;
-  };
+  }, [language]);
+
+  // Memoized context value to prevent unnecessary re-renders
+  const contextValue = useMemo(() => ({
+    language,
+    toggleLanguage,
+    t
+  }), [language, toggleLanguage, t]);
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
+    <LanguageContext.Provider value={contextValue}>
       {children}
     </LanguageContext.Provider>
   );
