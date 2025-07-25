@@ -3,13 +3,15 @@
   "short_name": "WSM Explorer",
   "description": "Discover the authentic beauty of Wang Sam Mo, Udon Thani",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#1a1a1a",
-  "background_color": "#ffffff",
-  "orientation": "portrait-primary",
+  "theme_color": "#f59e0b",
+  "background_color": "#fef3c7",
+  "orientation": "any",
   "categories": ["travel", "tourism", "lifestyle"],
   "lang": "en",
   "dir": "ltr",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/favicon-16x16.png",
