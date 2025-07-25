@@ -107,6 +107,24 @@ const ProductsSection = () => {
     }
   };
 
+  const handleAddToCart = (product: Product) => {
+    if (product.price) {
+      addItem({
+        id: product.id,
+        name: product.name,
+        name_thai: product.name_thai,
+        price: product.price,
+        image: product.images[0] || '/placeholder.svg',
+        category: product.service_type
+      });
+
+      toast({
+        title: t('cart.added'),
+        description: `${product.name} added to cart`,
+      });
+    }
+  };
+
   if (loading) {
     return (
       <section className="py-12 bg-gradient-to-br from-accent/20 to-secondary/10">
