@@ -70,7 +70,7 @@ const ProductsSection = () => {
         {
           id: '3',
           name: 'Local Tea',
-          name_thai: 'ชาท้องถิ่นวังสามหมอ',
+          name_thai: 'ชาท้องถิ่นว��งสามหมอ',
           description: 'Taste Wang Sam Mo\'s organic tea, grown in the hills, 200 THB/pack.',
           images: ['https://images.unsplash.com/photo-1517022812141-2362096515c9?w=400&h=300&fit=crop'],
           rating: 4.7,
@@ -118,11 +118,11 @@ const ProductsSection = () => {
     <section className="py-12 bg-gradient-to-br from-accent/20 to-secondary/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Local Products"
-          titleThai="ผลิตภัณฑ์ท้องถิ่น"
-          subtitle="Discover authentic handmade products and local specialties"
+          title="Wang Sam Mo Local Products"
+          titleThai="ผลิตภัณฑ์ท้องถิ่นวังสามหมอ"
+          subtitle="Authentic pickled vegetables, Issan handicrafts, and organic tea from the hills #วังสามหมอ"
           linkTo="/services"
-          linkText="Shop All Products"
+          linkText="Shop Now"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
