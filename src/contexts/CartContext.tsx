@@ -116,40 +116,46 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('wangsammo-cart', JSON.stringify(state.items));
   }, [state.items]);
 
-  const addItem = (item: Omit<CartItem, 'quantity'>) => {
+  // Memoized action functions for better performance
+  const addItem = useCallback((item: Omit<CartItem, 'quantity'>) => {
     dispatch({ type: 'ADD_ITEM', payload: item });
-  };
+  }, []);
 
-  const removeItem = (id: string) => {
+  const removeItem = useCallback((id: string) => {
     dispatch({ type: 'REMOVE_ITEM', payload: id });
-  };
+  }, []);
 
-  const updateQuantity = (id: string, quantity: number) => {
+  const updateQuantity = useCallback((id: string, quantity: number) => {
     dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } });
-  };
+  }, []);
 
-  const toggleCart = () => {
+  const toggleCart = useCallback(() => {
     dispatch({ type: 'TOGGLE_CART' });
-  };
+  }, []);
 
-  const clearCart = () => {
+  const clearCart = useCallback(() => {
     dispatch({ type: 'CLEAR_CART' });
-  };
+  }, []);
 
-  const itemCount = state.items.reduce((sum, item) => sum + item.quantity, 0);
+  // Memoized calculated values
+  const itemCount = useMemo(() =>
+    state.items.reduce((sum, item) => sum + item.quantity, 0),
+    [state.items]
+  );
+
+  // Memoized context value to prevent unnecessary re-renders
+  const contextValue = useMemo(() => ({
+    state,
+    addItem,
+    removeItem,
+    updateQuantity,
+    toggleCart,
+    clearCart,
+    itemCount,
+  }), [state, addItem, removeItem, updateQuantity, toggleCart, clearCart, itemCount]);
 
   return (
-    <CartContext.Provider
-      value={{
-        state,
-        addItem,
-        removeItem,
-        updateQuantity,
-        toggleCart,
-        clearCart,
-        itemCount,
-      }}
-    >
+    <CartContext.Provider value={contextValue}>
       {children}
     </CartContext.Provider>
   );
