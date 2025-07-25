@@ -44,9 +44,9 @@ const ServiceFilters = ({
 
   const productCategories = [
     { value: "all", label: "All Products" },
-    { value: "food", label: "Local Food" },
-    { value: "handicraft", label: "Handicrafts" },
-    { value: "souvenir", label: "Souvenirs" },
+    { value: "pickled", label: "Pickled Vegetables" },
+    { value: "handicrafts", label: "Handicrafts" },
+    { value: "tea", label: "Local Tea" },
   ];
 
   const locations = [

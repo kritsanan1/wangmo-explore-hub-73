@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Star, Camera } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import OptimizedImage from "@/components/ui/optimized-image";
 import SectionHeader from "./SectionHeader";
 
 type Attraction = {
@@ -50,26 +51,36 @@ const AttractionsSection = () => {
       setAttractions(transformedData);
     } catch (error) {
       console.error('Error fetching attractions:', error);
-      // Fallback to sample data
+      // Fallback to sample data based on Google search results
       setAttractions([
         {
           id: '1',
           name: 'Wang Yai Park',
           name_thai: 'สวนวังใหญ่',
-          description: 'Beautiful public park with lotus ponds, walking trails, and traditional Thai architecture perfect for relaxation.',
-          images: ['/src/assets/wang-yai-park-attraction.jpg'],
-          rating: 4.5,
-          location: { address: 'Wang Sam Mo, Udon Thani', coordinates: { lat: 17.4, lng: 102.8 } },
+          description: 'Enjoy rafting at Wang Yai Park, Nong Kung Thap Ma. A serene escape amidst mountains and clear waters.',
+          images: ['https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop'],
+          rating: 4.7,
+          location: { address: 'Nong Kung Thap Ma, Wang Sam Mo', coordinates: { lat: 17.4, lng: 102.8 } },
           featured: true
         },
         {
           id: '2',
           name: 'Phasuk Temple',
           name_thai: 'วัดผาสุก',
-          description: 'Ancient Buddhist temple featuring traditional Issan architecture and peaceful meditation gardens.',
-          images: ['/src/assets/phasuk-temple.jpg'],
-          rating: 4.3,
+          description: 'Visit Phasuk Temple, a cultural gem in Wang Sam Mo, steeped in local history.',
+          images: ['https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=400&h=300&fit=crop'],
+          rating: 4.5,
           location: { address: 'Wang Sam Mo, Udon Thani', coordinates: { lat: 17.4, lng: 102.8 } },
+          featured: true
+        },
+        {
+          id: '3',
+          name: 'Tham Sumontana Cave',
+          name_thai: 'ถ้ำสุมนตาน',
+          description: 'Explore the mystical Tham Sumontana Cave, a sacred meditation site on Phu Phan Mountains.',
+          images: ['https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?w=400&h=300&fit=crop'],
+          rating: 4.3,
+          location: { address: 'Phu Phan Mountains, Wang Sam Mo', coordinates: { lat: 17.4, lng: 102.8 } },
           featured: true
         }
       ]);
@@ -99,21 +110,24 @@ const AttractionsSection = () => {
     <section className="py-12 bg-gradient-to-br from-accent/20 to-secondary/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Discover Attractions"
-          titleThai="สำรวจสถานที่ท่องเที่ยว"
-          subtitle="Explore the beautiful sights and cultural landmarks of Wang Sam Mo"
+          title="Explore Wang Sam Mo Attractions"
+          titleThai="สำรวจส���านที่ท่องเที่ยววังสามหมอ"
+          subtitle="Discover rafting adventures, ancient temples, and mystical caves in Udon Thani's cultural heart #วังสามหมอ"
           linkTo="/attractions"
-          linkText="Explore More"
+          linkText="See All Attractions"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {attractions.map((attraction) => (
             <Card key={attraction.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
               <div className="relative h-48 overflow-hidden">
-                <img
+                <OptimizedImage
                   src={attraction.images[0] || '/placeholder.svg'}
                   alt={attraction.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  width={400}
+                  height={300}
+                  lazy={true}
                 />
                 <div className="absolute top-3 right-3">
                   <Badge className="bg-white/90 text-foreground">
@@ -157,4 +171,4 @@ const AttractionsSection = () => {
   );
 };
 
-export default AttractionsSection;
+export default memo(AttractionsSection);

@@ -53,46 +53,32 @@ const JobsSection = () => {
         }));
         setJobs(transformedData);
       } else {
-        // Fallback to sample data
+        // Sample data based on requested Wang Sam Mo job listings
         setJobs([
           {
             id: '1',
-            title: 'Restaurant Staff',
-            title_thai: 'พนักงานร้านอาหาร',
-            company: 'Sahamui & Sons',
-            company_thai: 'สะหมุยและลูก',
-            description: 'Join our team at the famous Issan restaurant. Looking for friendly staff with customer service experience.',
-            salary_range: '12,000-15,000 THB/month',
+            title: 'Restaurant Staff at Baan Suan Rim Nam',
+            title_thai: 'พนักงานร้านอาหารบ้านสวนริมน้ำ',
+            company: 'Baan Suan Rim Nam',
+            company_thai: 'บ้านสวนริมน้ำ',
+            description: 'Join Baan Suan Rim Nam\'s team, 10,000 THB/month. Apply now!',
+            salary_range: '10,000 THB/month',
             job_type: 'Full-time',
-            location: { address: 'Wang Sam Mo Market, Udon Thani' },
+            location: { address: 'Wang Yai, Wang Sam Mo' },
             status: 'active',
             featured: true,
             created_at: new Date().toISOString()
           },
           {
             id: '2',
-            title: 'Tour Guide',
-            title_thai: 'ไกด์นำเที่ยว',
+            title: 'Tour Guide in Phasuk',
+            title_thai: 'ไกด์นำเที่ยวพระสุก',
             company: 'Wang Sam Mo Tourism',
             company_thai: 'การท่องเที่ยววังสามหมอ',
-            description: 'Experienced tour guide needed for cultural and historical tours. Must speak both Thai and English.',
-            salary_range: '500-1,500 THB/day',
-            job_type: 'Part-time',
-            location: { address: 'Phasuk Temple Area' },
-            status: 'active',
-            featured: true,
-            created_at: new Date().toISOString()
-          },
-          {
-            id: '3',
-            title: 'Homestay Host',
-            title_thai: 'เจ้าของโฮมสเตย์',
-            company: 'Bua Daeng Homestay',
-            company_thai: 'บัวแดง โฮมสเตย์',
-            description: 'Looking for friendly hosts to help manage our growing homestay business and provide excellent guest experience.',
-            salary_range: '10,000-18,000 THB/month',
+            description: 'Be a tour guide in Wang Sam Mo, share local culture, ~12,000 THB/month.',
+            salary_range: '12,000 THB/month',
             job_type: 'Full-time',
-            location: { address: 'Wang Sam Mo Village' },
+            location: { address: 'Phasuk Temple Area, Wang Sam Mo' },
             status: 'active',
             featured: true,
             created_at: new Date().toISOString()
@@ -149,11 +135,11 @@ const JobsSection = () => {
     <section className="py-12 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Job Opportunities"
-          titleThai="โอกาสการทำงาน"
-          subtitle="Join the growing tourism industry in Wang Sam Mo"
+          title="Wang Sam Mo Jobs"
+          titleThai="งานวังสามหมอ"
+          subtitle="Join Baan Suan Rim Nam team or become a cultural tour guide in Udon Thani's tourism hub"
           linkTo="/jobs"
-          linkText="View All Jobs"
+          linkText="See All Jobs"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

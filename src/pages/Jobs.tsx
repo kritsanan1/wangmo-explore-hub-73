@@ -6,6 +6,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Plus, Briefcase, Users } from "lucide-react";
+import { PageTitle, SectionTitle, SubsectionTitle } from "@/components/seo/SEOHeading";
+import Breadcrumb from "@/components/seo/Breadcrumb";
 import JobFilters from "@/components/jobs/JobFilters";
 import JobCard from "@/components/jobs/JobCard";
 import JobApplicationDialog from "@/components/jobs/JobApplicationDialog";
@@ -131,17 +133,20 @@ const Jobs = () => {
     <Layout>
       <div className="min-h-screen py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Hero Section */}
+          <Breadcrumb />
+
+          {/* Hero Section with SEO-optimized headings */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              Job Opportunities
-            </h1>
-            <h2 className="text-xl lg:text-2xl text-muted-foreground mb-6">
-              โอกาสในการทำงาน
-            </h2>
+            <PageTitle keywords={['Wang Sam Mo jobs', 'Udon Thani employment', 'tourism jobs', 'วังสามหมอ งาน']}>
+              Wang Sam Mo Job Opportunities | Tourism Employment #วังสามหมอ
+            </PageTitle>
+            <SectionTitle className="text-xl lg:text-2xl text-muted-foreground mb-6 font-normal">
+              โอกาสในการทำงานวังสามหมอ • Tourism & Hospitality Careers
+            </SectionTitle>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Discover career opportunities in Wang Sam Mo's growing tourism and hospitality sector. 
-              From restaurant positions to tour guide roles, find your perfect job in our community.
+              Discover career opportunities in Wang Sam Mo's growing tourism and hospitality sector.
+              From restaurant positions to tour guide roles, find your perfect job in our authentic Thai community.
+              <strong>Wang Sam Mo jobs, Udon Thani employment opportunities.</strong>
             </p>
           </div>
 
@@ -203,7 +208,7 @@ const Jobs = () => {
                 {filteredJobs.length === 0 ? (
                   <div className="text-center py-12">
                     <Briefcase className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                    <h3 className="text-lg font-semibold mb-2">No jobs found</h3>
+                    <SubsectionTitle className="text-lg font-semibold mb-2">No jobs found</SubsectionTitle>
                     <p className="text-muted-foreground mb-4">
                       Try adjusting your search criteria to see more results.
                     </p>
@@ -234,7 +239,7 @@ const Jobs = () => {
             <TabsContent value="employer" className="space-y-8">
               <div className="text-center py-12">
                 <Users className="h-16 w-16 mx-auto text-primary mb-6" />
-                <h3 className="text-2xl font-semibold mb-4">Hire Local Talent</h3>
+                <SectionTitle keywords={['Wang Sam Mo hiring', 'local talent', 'employer services']}>Hire Wang Sam Mo Local Talent</SectionTitle>
                 <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
                   Post your job openings and connect with qualified candidates in Wang Sam Mo. 
                   Our job board helps local businesses find the right people for restaurant, tourism, 
@@ -242,19 +247,19 @@ const Jobs = () => {
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                   <div className="bg-card p-6 rounded-lg border">
-                    <h4 className="font-semibold mb-2">Easy Posting</h4>
+                    <SubsectionTitle className="font-semibold mb-2 text-base">Easy Job Posting</SubsectionTitle>
                     <p className="text-sm text-muted-foreground">
                       Create detailed job listings with requirements, benefits, and salary information.
                     </p>
                   </div>
                   <div className="bg-card p-6 rounded-lg border">
-                    <h4 className="font-semibold mb-2">Local Reach</h4>
+                    <SubsectionTitle className="font-semibold mb-2 text-base">Wang Sam Mo Local Reach</SubsectionTitle>
                     <p className="text-sm text-muted-foreground">
                       Connect with candidates who know the area and understand local culture.
                     </p>
                   </div>
                   <div className="bg-card p-6 rounded-lg border">
-                    <h4 className="font-semibold mb-2">Manage Applications</h4>
+                    <SubsectionTitle className="font-semibold mb-2 text-base">Manage Applications</SubsectionTitle>
                     <p className="text-sm text-muted-foreground">
                       Review resumes and communicate directly with interested candidates.
                     </p>

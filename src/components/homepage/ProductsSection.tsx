@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Star, ShoppingBag, Package } from "lucide-react";
+import { MapPin, Star, ShoppingBag, Package, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useCart } from "@/contexts/CartContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useToast } from "@/hooks/use-toast";
+import OptimizedImage from "@/components/ui/optimized-image";
 import SectionHeader from "./SectionHeader";
 
 type Product = {
@@ -20,11 +24,24 @@ type Product = {
     address: string;
   };
   featured: boolean;
+  price: number;
+  details: {
+    weight?: string;
+    shelf_life?: string;
+    producer?: string;
+    dimensions?: string;
+    material?: string;
+    packaging?: string;
+    caffeine_free?: boolean;
+  };
 };
 
 const ProductsSection = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const { addItem, itemCount } = useCart();
+  const { t } = useLanguage();
+  const { toast } = useToast();
 
   useEffect(() => {
     fetchFeaturedProducts();
@@ -41,55 +58,61 @@ const ProductsSection = () => {
 
       if (error) throw error;
       
-      // For now, use sample data to demonstrate the functionality
+      // Enhanced Wang Sam Mo products with detailed information
       setProducts([
         {
           id: '1',
-          name: 'Traditional Pickled Vegetables',
-          name_thai: 'ผักดองแบบดั้งเดิม',
-          description: 'Handmade traditional pickled vegetables using secret family recipes passed down for generations.',
-          images: ['https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=800&h=400&fit=crop'],
+          name: 'Wang Sam Mo Pickled Vegetables',
+          name_thai: 'ผักดองวังสามหมอ',
+          description: 'Authentic Issan pickled vegetables, made with local ingredients from Wang Sam Mo farms. Perfect for gifting or home cooking. #tourderwang',
+          images: ['https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=300&fit=crop'],
           rating: 4.8,
           price_range: '300 THB/set',
           service_type: 'Local Food',
           location: { address: 'Wang Sam Mo Market, Udon Thani' },
-          featured: true
+          featured: true,
+          price: 300,
+          details: {
+            weight: '500g jar',
+            shelf_life: '6 months',
+            producer: 'Local cooperative',
+          }
         },
         {
           id: '2',
-          name: 'Issan Handicrafts',
+          name: 'Issan Handwoven Crafts',
           name_thai: 'งานฝีมืออีสาน',
-          description: 'Beautiful handwoven textiles and traditional crafts made by local artisans.',
-          images: ['https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=800&h=400&fit=crop'],
+          description: 'Unique handwoven crafts by Wang Sam Mo artisans, showcasing Issan culture. Ideal as souvenirs. #ที่นี่วังสามหมอ',
+          images: ['https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=300&fit=crop'],
           rating: 4.6,
-          price_range: '500-2000 THB',
+          price_range: '500 THB',
           service_type: 'Handicrafts',
           location: { address: 'Wang Sam Mo Craft Center' },
-          featured: true
+          featured: true,
+          price: 500,
+          details: {
+            dimensions: '30x20 cm',
+            material: 'Natural materials',
+            producer: 'Local artisans',
+          }
         },
         {
           id: '3',
-          name: 'Local Honey & Herbs',
-          name_thai: 'น้ำผึ้งและสมุนไพรท้องถิ่น',
-          description: 'Pure local honey and medicinal herbs sourced directly from Wang Sam Mo farmers.',
-          images: ['https://images.unsplash.com/photo-1517022812141-2362096515c9?w=800&h=400&fit=crop'],
+          name: 'Wang Sam Mo Organic Tea',
+          name_thai: 'ชาท้องถิ่นวังสามหมอ',
+          description: 'Organic tea grown in the hills of Wang Sam Mo, offering a refreshing taste of nature. #ทัวร์เดอวัง',
+          images: ['https://images.unsplash.com/photo-1517022812141-2362096515c9?w=400&h=300&fit=crop'],
           rating: 4.7,
-          price_range: '250-800 THB',
+          price_range: '200 THB/pack',
           service_type: 'Natural Products',
-          location: { address: 'Wang Sam Mo Organic Farm' },
-          featured: true
-        },
-        {
-          id: '4',
-          name: 'Silk Scarves & Fabrics',
-          name_thai: 'ผ้าไหมและผ้าทอ',
-          description: 'Exquisite silk products showcasing traditional Issan weaving techniques.',
-          images: ['https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&h=400&fit=crop'],
-          rating: 4.9,
-          price_range: '800-3000 THB',
-          service_type: 'Textiles',
-          location: { address: 'Wang Sam Mo Weaving Village' },
-          featured: true
+          location: { address: 'Wang Sam Mo Hills' },
+          featured: true,
+          price: 200,
+          details: {
+            weight: '100g pack',
+            caffeine_free: true,
+            packaging: 'Eco-friendly packaging',
+          }
         }
       ]);
     } catch (error) {
@@ -108,6 +131,25 @@ const ProductsSection = () => {
       default: return 'bg-secondary text-secondary-foreground';
     }
   };
+
+  // Memoized add to cart function
+  const handleAddToCart = useCallback((product: Product) => {
+    if (product.price) {
+      addItem({
+        id: product.id,
+        name: product.name,
+        name_thai: product.name_thai,
+        price: product.price,
+        image: product.images[0] || '/placeholder.svg',
+        category: product.service_type
+      });
+
+      toast({
+        title: t('cart.added'),
+        description: `${product.name} added to cart`,
+      });
+    }
+  }, [addItem, toast, t]);
 
   if (loading) {
     return (
@@ -130,68 +172,124 @@ const ProductsSection = () => {
     <section className="py-12 bg-gradient-to-br from-accent/20 to-secondary/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Local Products"
-          titleThai="ผลิตภัณฑ์ท้องถิ่น"
-          subtitle="Discover authentic handmade products and local specialties"
+          title="Shop Wang Sam Mo's Local Treasures"
+          titleThai="ช้อปผลิตภัณฑ์ท้องถิ่นวังสามหมอ"
+          subtitle="Authentic pickled vegetables, handwoven crafts, and organic tea from local artisans #วังสามหมอ"
           linkTo="/services"
-          linkText="Shop All Products"
+          linkText="Shop Now"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={product.images[0] || '/placeholder.svg'}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute top-3 right-3">
-                  <Badge className="bg-white/90 text-foreground">
-                    <Star className="h-3 w-3 mr-1 fill-yellow-400 text-yellow-400" />
-                    {product.rating}
-                  </Badge>
+        <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product) => (
+              <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
+                <div className="relative h-48 overflow-hidden">
+                  <OptimizedImage
+                    src={product.images[0] || '/placeholder.svg'}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    width={400}
+                    height={300}
+                    lazy={true}
+                  />
+                  <div className="absolute top-3 right-3">
+                    <Badge className="bg-white/90 text-foreground">
+                      <Star className="h-3 w-3 mr-1 fill-yellow-400 text-yellow-400" />
+                      {product.rating}
+                    </Badge>
+                  </div>
+                  <div className="absolute top-3 left-3">
+                    <Badge className={getProductTypeColor(product.service_type)}>
+                      <Package className="h-3 w-3 mr-1" />
+                      {product.service_type}
+                    </Badge>
+                  </div>
+                  <div className="absolute bottom-3 left-3">
+                    <Badge className="bg-primary/90 text-primary-foreground">
+                      {product.price_range}
+                    </Badge>
+                  </div>
                 </div>
-                <div className="absolute top-3 left-3">
-                  <Badge className={getProductTypeColor(product.service_type)}>
-                    <Package className="h-3 w-3 mr-1" />
-                    {product.service_type}
-                  </Badge>
-                </div>
-                <div className="absolute bottom-3 left-3">
-                  <Badge className="bg-primary/90 text-primary-foreground">
-                    {product.price_range}
-                  </Badge>
-                </div>
-              </div>
-              
-              <CardContent className="p-4">
-                <h3 className="font-bold text-lg text-foreground mb-1 line-clamp-1">
-                  {product.name}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-2 font-medium">
-                  {product.name_thai}
-                </p>
-                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                  {product.description}
-                </p>
-                <div className="flex items-center text-xs text-muted-foreground mb-4">
-                  <MapPin className="h-3 w-3 mr-1" />
-                  <span className="line-clamp-1">{product.location.address}</span>
-                </div>
-                <Link to="/services">
-                  <Button className="w-full bg-primary hover:bg-primary/90">
-                    <ShoppingBag className="mr-2 h-4 w-4" />
-                    Shop Now
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
+
+                <CardContent className="p-4">
+                  <h3 className="font-bold text-lg text-foreground mb-1 line-clamp-1">
+                    {product.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-2 font-medium">
+                    {product.name_thai}
+                  </p>
+                  <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
+                    {product.description}
+                  </p>
+
+                  {/* Product Details */}
+                  <div className="text-xs text-muted-foreground mb-3 space-y-1">
+                    {product.details.weight && (
+                      <div className="flex items-center">
+                        <span className="font-medium mr-2">Weight:</span>
+                        <span>{product.details.weight}</span>
+                      </div>
+                    )}
+                    {product.details.dimensions && (
+                      <div className="flex items-center">
+                        <span className="font-medium mr-2">Size:</span>
+                        <span>{product.details.dimensions}</span>
+                      </div>
+                    )}
+                    {product.details.shelf_life && (
+                      <div className="flex items-center">
+                        <span className="font-medium mr-2">Shelf life:</span>
+                        <span>{product.details.shelf_life}</span>
+                      </div>
+                    )}
+                    {product.details.producer && (
+                      <div className="flex items-center">
+                        <span className="font-medium mr-2">Made by:</span>
+                        <span>{product.details.producer}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex items-center text-xs text-muted-foreground mb-4">
+                    <MapPin className="h-3 w-3 mr-1" />
+                    <span className="line-clamp-1">{product.location.address}</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button
+                      onClick={() => handleAddToCart(product)}
+                      className="bg-amber-600 hover:bg-amber-700 text-white"
+                      size="sm"
+                    >
+                      <Plus className="mr-1 h-4 w-4" />
+                      {t('products.add')}
+                    </Button>
+                    <Link to="/services">
+                      <Button variant="outline" size="sm" className="w-full">
+                        <ShoppingBag className="mr-1 h-4 w-4" />
+                        View
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* View Cart Button */}
+          <div className="text-center">
+            <Link to="/cart">
+              <Button
+                size="lg"
+                className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3"
+              >
+                <ShoppingBag className="mr-2 h-5 w-5" />
+                {t('cart.view')} ({itemCount} items)
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default ProductsSection;
+export default memo(ProductsSection);

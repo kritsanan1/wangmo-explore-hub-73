@@ -40,21 +40,31 @@ serve(async (req) => {
     if (!user?.email) throw new Error("User not authenticated or email not available");
     logStep("User authenticated", { userId: user.id, email: user.email });
 
-    const { plan_type, advertisement_data } = await req.json();
-    
+    const { plan_type, billing_cycle = "monthly", advertisement_data } = await req.json();
+
     // Validate plan type and get pricing
     const planPricing = {
-      basic: { amount: 50000, name: "Basic Plan" }, // 500 THB in cents
-      premium: { amount: 200000, name: "Premium Plan" }, // 2,000 THB in cents
-      enterprise: { amount: 500000, name: "Enterprise Plan" } // 5,000 THB in cents
+      basic: {
+        monthly: { amount: 50000, name: "Basic Plan (Monthly)" }, // 500 THB in cents
+        yearly: { amount: 500000, name: "Basic Plan (Yearly)" }   // 5,000 THB in cents (17% discount)
+      },
+      premium: {
+        monthly: { amount: 200000, name: "Premium Plan (Monthly)" }, // 2,000 THB in cents
+        yearly: { amount: 2000000, name: "Premium Plan (Yearly)" }   // 20,000 THB in cents (17% discount)
+      },
+      enterprise: {
+        monthly: { amount: 500000, name: "Enterprise Plan (Monthly)" }, // 5,000 THB in cents
+        yearly: { amount: 5000000, name: "Enterprise Plan (Yearly)" }   // 50,000 THB in cents (17% discount)
+      }
     };
 
-    if (!planPricing[plan_type as keyof typeof planPricing]) {
-      throw new Error("Invalid plan type");
+    const planCategory = planPricing[plan_type as keyof typeof planPricing];
+    if (!planCategory || !planCategory[billing_cycle as keyof typeof planCategory]) {
+      throw new Error("Invalid plan type or billing cycle");
     }
 
-    const selectedPlan = planPricing[plan_type as keyof typeof planPricing];
-    logStep("Plan selected", { plan_type, amount: selectedPlan.amount });
+    const selectedPlan = planCategory[billing_cycle as keyof typeof planCategory];
+    logStep("Plan selected", { plan_type, billing_cycle, amount: selectedPlan.amount });
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
     
@@ -86,7 +96,7 @@ serve(async (req) => {
               description: `Monthly advertising subscription for ${advertisement_data.business_name}` 
             },
             unit_amount: selectedPlan.amount,
-            recurring: { interval: "month" },
+            recurring: { interval: billing_cycle === "yearly" ? "year" : "month" },
           },
           quantity: 1,
         },
@@ -97,6 +107,7 @@ serve(async (req) => {
       metadata: {
         user_id: user.id,
         plan_type: plan_type,
+        billing_cycle: billing_cycle,
         advertisement_id: "pending"
       }
     });
@@ -119,7 +130,7 @@ serve(async (req) => {
         plan_type: plan_type,
         status: "pending", // Will be activated after payment
         start_date: new Date().toISOString(),
-        end_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days from now
+        end_date: new Date(Date.now() + (billing_cycle === "yearly" ? 365 : 30) * 24 * 60 * 60 * 1000).toISOString() // 30 days or 365 days
       })
       .select()
       .single();

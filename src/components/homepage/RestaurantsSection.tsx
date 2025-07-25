@@ -61,18 +61,18 @@ const RestaurantsSection = () => {
       setRestaurants(transformedData);
     } catch (error) {
       console.error('Error fetching restaurants:', error);
-      // Fallback to sample data
+      // Fallback to sample data based on Google search results
       setRestaurants([
         {
           id: '1',
-          name: 'Sahamui & Sons',
-          name_thai: 'สะหมุยและลูก',
-          description: 'Authentic Issan cuisine featuring traditional northeastern Thai dishes made with fresh local ingredients.',
-          images: ['https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=800&h=400&fit=crop'],
-          rating: 4.6,
+          name: 'Baan Suan Rim Nam',
+          name_thai: 'บ้านสวนริมน้ำ',
+          description: 'Savor authentic Issan dishes at Baan Suan Rim Nam, Wang Yai. Call 089-6220962.',
+          images: ['https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop'],
+          rating: 4.7,
           cuisine_type: 'Issan',
           price_range: '฿฿',
-          location: { address: 'Wang Sam Mo Market, Udon Thani' },
+          location: { address: 'Wang Yai, Wang Sam Mo' },
           opening_hours: {
             monday: '08:00-20:00',
             tuesday: '08:00-20:00',
@@ -86,14 +86,23 @@ const RestaurantsSection = () => {
         },
         {
           id: '2',
-          name: 'Local Noodle House',
-          name_thai: 'ร้านก๋วยเตี๋ยวบ้านเรา',
-          description: 'Traditional noodle shop serving authentic boat noodles and local favorites.',
-          images: ['https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&h=400&fit=crop'],
-          rating: 4.3,
+          name: 'Sahamui & Sons',
+          name_thai: 'สะหมุยและลูก',
+          description: 'Taste traditional Thai flavors at Sahamui & Sons, a Wang Sam Mo favorite.',
+          images: ['https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=300&fit=crop'],
+          rating: 4.5,
           cuisine_type: 'Thai',
-          price_range: '฿',
+          price_range: '฿฿',
           location: { address: 'Wang Sam Mo, Udon Thani' },
+          opening_hours: {
+            monday: '09:00-21:00',
+            tuesday: '09:00-21:00',
+            wednesday: '09:00-21:00',
+            thursday: '09:00-21:00',
+            friday: '09:00-21:00',
+            saturday: '09:00-21:00',
+            sunday: '09:00-20:00'
+          },
           featured: true
         }
       ]);
@@ -132,11 +141,11 @@ const RestaurantsSection = () => {
     <section className="py-12 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Featured Restaurants"
-          titleThai="ร้านอาหารแนะนำ"
-          subtitle="Taste authentic Issan cuisine and local specialties"
+          title="Wang Sam Mo Restaurants"
+          titleThai="ร้านอาหารวังสามหมอ"
+          subtitle="Taste authentic Issan dishes and traditional Thai flavors in the heart of Udon Thani"
           linkTo="/restaurants"
-          linkText="View All Restaurants"
+          linkText="See All Restaurants"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
