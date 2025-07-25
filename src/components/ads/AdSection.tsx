@@ -103,10 +103,10 @@ const AdSection = ({ className }: AdSectionProps) => {
         {/* Section Header */}
         <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-            Discover Local Businesses
+            Support Local Wang Sam Mo Businesses
           </h2>
           <p className="text-muted-foreground">
-            ค้นพบธุรกิจท้องถิ่นในวังสามหมอ - Support Local Wang Sam Mo Businesses
+            ค้นพบธุรกิจท้องถิ่นในวังสามหมอ - #ทัวร์เดอวัง #tourderwang
           </p>
         </div>
 
