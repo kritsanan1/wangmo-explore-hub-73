@@ -19,6 +19,8 @@ const About = lazy(() => import("./pages/About"));
 const Cart = lazy(() => import("./pages/Cart"));
 const AdDashboard = lazy(() => import("./pages/AdDashboard"));
 const SEODashboardPage = lazy(() => import("./pages/SEODashboard"));
+const History = lazy(() => import("./pages/History"));
+const PhotoAlbum = lazy(() => import("./pages/PhotoAlbum"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Loading component for lazy routes
