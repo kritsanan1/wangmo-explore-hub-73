@@ -76,9 +76,14 @@ const AttractionCard = ({ attraction }: AttractionCardProps) => {
           </div>
         )}
         
-        <Button className="w-full" variant="outline">
-          Learn More
-        </Button>
+        <AttractionDetailCard
+          attraction={attraction}
+          trigger={
+            <Button className="w-full" variant="outline">
+              Learn More
+            </Button>
+          }
+        />
       </CardContent>
     </Card>
   );
