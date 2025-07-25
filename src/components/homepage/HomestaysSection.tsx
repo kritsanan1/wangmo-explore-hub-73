@@ -121,11 +121,11 @@ const HomestaysSection = () => {
     <section className="py-12 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Featured Homestays"
-          titleThai="โฮมสเตย์แนะนำ"
-          subtitle="Stay with local families and experience authentic Thai hospitality"
-          linkTo="/restaurants"
-          linkText="View All Homestays"
+          title="Wang Sam Mo Homestays"
+          titleThai="โฮมสเตย์วังสามหมอ"
+          subtitle="Experience authentic Thai culture with rafting, garden views, and traditional hospitality"
+          linkTo="/services"
+          linkText="Book a Homestay"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
