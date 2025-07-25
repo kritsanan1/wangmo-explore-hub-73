@@ -251,4 +251,4 @@ const HomestaysSection = () => {
   );
 };
 
-export default HomestaysSection;
+export default memo(HomestaysSection);
