@@ -29,7 +29,7 @@ type Product = {
 const ProductsSection = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const { addItem } = useCart();
+  const { addItem, itemCount } = useCart();
   const { t } = useLanguage();
   const { toast } = useToast();
 
@@ -53,7 +53,7 @@ const ProductsSection = () => {
         {
           id: '1',
           name: 'Pickled Vegetables',
-          name_thai: 'ผักดองวังสามหม��',
+          name_thai: 'ผักดองวังสามหมอ',
           description: 'Buy authentic Wang Sam Mo pickled vegetables, 300 THB/set. #วังสามหมอ',
           images: ['https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=300&fit=crop'],
           rating: 4.8,
