@@ -111,7 +111,7 @@ const AttractionsSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Explore Wang Sam Mo Attractions"
-          titleThai="สำรวจสถานที่ท่องเที่ยววังสามหมอ"
+          titleThai="สำรวจส���านที่ท่องเที่ยววังสามหมอ"
           subtitle="Discover rafting adventures, ancient temples, and mystical caves in Udon Thani's cultural heart #วังสามหมอ"
           linkTo="/attractions"
           linkText="See All Attractions"
@@ -171,4 +171,4 @@ const AttractionsSection = () => {
   );
 };
 
-export default AttractionsSection;
+export default memo(AttractionsSection);
