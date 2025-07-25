@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ArrowLeft, ChevronLeft, ChevronRight, Camera, MapPin, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
-import { SEOHeading } from "@/components/seo/SEOHeading";
+import SEOHeading from "@/components/seo/SEOHeading";
 
 interface PhotoItem {
   id: number;
@@ -91,7 +91,7 @@ const fullPhotoGallery: PhotoItem[] = [
     fullSize: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
     caption: "Sunrise over Phu Phan Mountains",
     description: "Breathtaking sunrise view from the hills overlooking Wang Sam Mo district and the surrounding countryside.",
-    hashtags: "#ที่นี่วังสามหมอ",
+    hashtags: "#ที่นี่วัง��ามหมอ",
     location: "Phu Phan Mountains",
     category: "Nature",
     date: "2024"
@@ -102,7 +102,7 @@ const fullPhotoGallery: PhotoItem[] = [
     fullSize: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800&h=600&fit=crop",
     caption: "Traditional mor lam performance",
     description: "Local musicians performing traditional Issan mor lam music during community celebrations.",
-    hashtags: "#ทัวร��เดอวัง",
+    hashtags: "#ทัวร์เดอวัง",
     location: "Community Center",
     category: "Culture",
     date: "2024"
