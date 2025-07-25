@@ -107,6 +107,7 @@ serve(async (req) => {
       metadata: {
         user_id: user.id,
         plan_type: plan_type,
+        billing_cycle: billing_cycle,
         advertisement_id: "pending"
       }
     });
