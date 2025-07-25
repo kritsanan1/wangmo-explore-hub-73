@@ -25,20 +25,25 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <SEOProvider>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/attractions" element={<Attractions />} />
-            <Route path="/restaurants" element={<Restaurants />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/jobs" element={<Jobs />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/ad-dashboard" element={<AdDashboard />} />
-            <Route path="/seo-dashboard" element={<SEODashboardPage />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </SEOProvider>
+        <LanguageProvider>
+          <CartProvider>
+            <SEOProvider>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/attractions" element={<Attractions />} />
+                <Route path="/restaurants" element={<Restaurants />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/jobs" element={<Jobs />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/ad-dashboard" element={<AdDashboard />} />
+                <Route path="/seo-dashboard" element={<SEODashboardPage />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </SEOProvider>
+          </CartProvider>
+        </LanguageProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
