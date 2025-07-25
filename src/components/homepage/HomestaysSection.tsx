@@ -42,42 +42,42 @@ const HomestaysSection = () => {
 
       if (error) throw error;
       
-      // For now, use sample data since we need to set up homestays properly
+      // Sample data based on Google search results for Wang Sam Mo homestays
       setHomestays([
         {
           id: '1',
           name: 'Bua Daeng Homestay',
           name_thai: 'บัวแดง โฮมสเตย์',
-          description: 'Experience authentic Thai culture in our traditional homestay with beautiful garden views and home-cooked meals.',
-          images: ['https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&h=400&fit=crop'],
+          description: 'Stay at Bua Daeng Homestay, 800 THB/night, with WiFi and garden views, 33 km from Udon Thani.',
+          images: ['https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=300&fit=crop'],
           rating: 4.7,
           price_range: '800 THB/night',
-          location: { address: 'Wang Sam Mo Village, Udon Thani' },
-          features: ['WiFi', 'Parking', 'Garden View', 'Home Cooking'],
+          location: { address: 'Wang Sam Mo, 33 km from Udon Thani' },
+          features: ['WiFi', 'Garden Views', 'Home Cooking'],
           featured: true
         },
         {
           id: '2',
-          name: 'Ban Diam Homestay',
-          name_thai: 'บ้านเดี่ยม โฮมสเตย์',
-          description: 'Immerse yourself in local traditions with our family-run homestay offering authentic cultural experiences.',
-          images: ['https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=400&fit=crop'],
-          rating: 4.5,
-          price_range: '700 THB/night',
-          location: { address: 'Wang Sam Mo, Udon Thani' },
-          features: ['WiFi', 'Cooking Classes', 'Local Tours'],
+          name: 'Baan Suan Rim Nam Homestay',
+          name_thai: 'บ้านสวนริมน้ำ โฮมสเตย์',
+          description: 'Relax at Baan Suan Rim Nam, Wang Yai, with rafting and nature. Call 089-6220962.',
+          images: ['https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=300&fit=crop'],
+          rating: 4.6,
+          price_range: '750 THB/night',
+          location: { address: 'Wang Yai, Wang Sam Mo' },
+          features: ['Riverside', 'Rafting', 'Nature Tours'],
           featured: true
         },
         {
           id: '3',
-          name: 'Wang Sam Mo Family Stay',
-          name_thai: 'วังสามหมอ แฟมิลี่ สเตย์',
-          description: 'Cozy family homestay with modern amenities while maintaining traditional charm and hospitality.',
-          images: ['https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&h=400&fit=crop'],
-          rating: 4.6,
-          price_range: '900 THB/night',
-          location: { address: 'Wang Sam Mo Center, Udon Thani' },
-          features: ['WiFi', 'Air Conditioning', 'Breakfast', 'Parking'],
+          name: 'Ban Diam Homestay',
+          name_thai: 'บ้านเดี่ยม โฮมสเตย์',
+          description: 'Experience Ban Diam Homestay in Kumphawapi, modern amenities, ~800 THB/night.',
+          images: ['https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=300&fit=crop'],
+          rating: 4.5,
+          price_range: '800 THB/night',
+          location: { address: 'Kumphawapi, Wang Sam Mo' },
+          features: ['Modern Amenities', 'Cultural Experience', 'WiFi'],
           featured: true
         }
       ]);
