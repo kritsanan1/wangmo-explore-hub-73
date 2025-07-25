@@ -103,7 +103,10 @@ const EnhancedNavigation = () => {
             {navItems.map((item) => (
               <div key={item.name} className="relative">
                 {item.hasDropdown ? (
-                  <DropdownMenu open={isProductsOpen} onOpenChange={setIsProductsOpen}>
+                  <DropdownMenu
+                    open={item.name === t('nav.products') ? isProductsOpen : isAboutOpen}
+                    onOpenChange={item.name === t('nav.products') ? setIsProductsOpen : setIsAboutOpen}
+                  >
                     <DropdownMenuTrigger asChild>
                       <Button
                         variant="ghost"
@@ -123,7 +126,13 @@ const EnhancedNavigation = () => {
                           <Link
                             to={dropdownItem.href}
                             className="w-full px-3 py-2 text-sm hover:bg-amber-50 hover:text-amber-900 transition-colors"
-                            onClick={() => setIsProductsOpen(false)}
+                            onClick={() => {
+                              if (item.name === t('nav.products')) {
+                                setIsProductsOpen(false);
+                              } else {
+                                setIsAboutOpen(false);
+                              }
+                            }}
                           >
                             {dropdownItem.name}
                           </Link>
