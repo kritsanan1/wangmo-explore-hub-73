@@ -4,7 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import { SEOProvider } from "@/components/SEOProvider";
+import { EnhancedSEOProvider } from "@/components/seo/EnhancedSEOProvider";
+import { SEO_URLS, URL_REDIRECTS } from "@/constants/seo-urls";
 import { CartProvider } from "@/contexts/CartContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
@@ -49,23 +50,40 @@ const App = () => (
       <BrowserRouter>
         <LanguageProvider>
           <CartProvider>
-            <SEOProvider>
+            <EnhancedSEOProvider>
               <Suspense fallback={<PageLoader />}>
                 <Routes>
-                  <Route path="/" element={<Index />} />
+                  {/* Primary SEO-optimized routes */}
+                  <Route path={SEO_URLS.home} element={<Index />} />
+                  <Route path={SEO_URLS.attractions} element={<Attractions />} />
+                  <Route path={SEO_URLS.restaurants} element={<Restaurants />} />
+                  <Route path={SEO_URLS.services} element={<Services />} />
+                  <Route path={SEO_URLS.jobs} element={<Jobs />} />
+                  <Route path={SEO_URLS.about} element={<About />} />
+                  <Route path={SEO_URLS.cart} element={<Cart />} />
+
+                  {/* Legacy URL redirects for SEO */}
                   <Route path="/attractions" element={<Attractions />} />
                   <Route path="/restaurants" element={<Restaurants />} />
                   <Route path="/services" element={<Services />} />
                   <Route path="/jobs" element={<Jobs />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/cart" element={<Cart />} />
+
+                  {/* Admin routes */}
                   <Route path="/ad-dashboard" element={<AdDashboard />} />
                   <Route path="/seo-dashboard" element={<SEODashboardPage />} />
+
+                  {/* Product category routes */}
+                  <Route path={SEO_URLS.pickledVegetables} element={<Services />} />
+                  <Route path={SEO_URLS.handicrafts} element={<Services />} />
+                  <Route path={SEO_URLS.organicTea} element={<Services />} />
+
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
-            </SEOProvider>
+            </EnhancedSEOProvider>
           </CartProvider>
         </LanguageProvider>
       </BrowserRouter>
