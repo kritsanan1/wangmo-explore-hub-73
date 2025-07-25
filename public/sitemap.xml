@@ -1,39 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                           http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<!-- Main Homepage -->
 <url>
-<loc>https://wang-sam-mo-explorer.com/</loc>
-<lastmod>2025-01-25T00:00:00+00:00</lastmod>
-<priority>1.00</priority>
-<changefreq>weekly</changefreq>
+  <loc>https://wang-sam-mo-explorer.com/</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://wang-sam-mo-explorer.com/" />
+  <xhtml:link rel="alternate" hreflang="th" href="https://wang-sam-mo-explorer.com/th/" />
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>1.00</priority>
+  <changefreq>daily</changefreq>
 </url>
+
+<!-- SEO-Optimized Primary Pages -->
 <url>
-<loc>https://wang-sam-mo-explorer.com/attractions</loc>
-<lastmod>2025-01-25T00:00:00+00:00</lastmod>
-<priority>0.90</priority>
-<changefreq>weekly</changefreq>
+  <loc>https://wang-sam-mo-explorer.com/wang-sam-mo-attractions</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://wang-sam-mo-explorer.com/wang-sam-mo-attractions" />
+  <xhtml:link rel="alternate" hreflang="th" href="https://wang-sam-mo-explorer.com/th/wang-sam-mo-attractions" />
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.95</priority>
+  <changefreq>weekly</changefreq>
 </url>
+
 <url>
-<loc>https://wang-sam-mo-explorer.com/restaurants</loc>
-<lastmod>2025-01-25T00:00:00+00:00</lastmod>
-<priority>0.90</priority>
-<changefreq>weekly</changefreq>
+  <loc>https://wang-sam-mo-explorer.com/wang-sam-mo-restaurants</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://wang-sam-mo-explorer.com/wang-sam-mo-restaurants" />
+  <xhtml:link rel="alternate" hreflang="th" href="https://wang-sam-mo-explorer.com/th/wang-sam-mo-restaurants" />
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.90</priority>
+  <changefreq>weekly</changefreq>
 </url>
+
 <url>
-<loc>https://wang-sam-mo-explorer.com/services</loc>
-<lastmod>2025-01-25T00:00:00+00:00</lastmod>
-<priority>0.80</priority>
-<changefreq>monthly</changefreq>
+  <loc>https://wang-sam-mo-explorer.com/wang-sam-mo-local-products</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://wang-sam-mo-explorer.com/wang-sam-mo-local-products" />
+  <xhtml:link rel="alternate" hreflang="th" href="https://wang-sam-mo-explorer.com/th/wang-sam-mo-local-products" />
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.90</priority>
+  <changefreq>weekly</changefreq>
 </url>
+
 <url>
-<loc>https://wang-sam-mo-explorer.com/jobs</loc>
-<lastmod>2025-01-25T00:00:00+00:00</lastmod>
-<priority>0.70</priority>
-<changefreq>monthly</changefreq>
+  <loc>https://wang-sam-mo-explorer.com/wang-sam-mo-homestays</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://wang-sam-mo-explorer.com/wang-sam-mo-homestays" />
+  <xhtml:link rel="alternate" hreflang="th" href="https://wang-sam-mo-explorer.com/th/wang-sam-mo-homestays" />
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.90</priority>
+  <changefreq>weekly</changefreq>
 </url>
+
 <url>
-<loc>https://wang-sam-mo-explorer.com/about</loc>
-<lastmod>2025-01-25T00:00:00+00:00</lastmod>
-<priority>0.60</priority>
-<changefreq>monthly</changefreq>
+  <loc>https://wang-sam-mo-explorer.com/wang-sam-mo-services</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://wang-sam-mo-explorer.com/wang-sam-mo-services" />
+  <xhtml:link rel="alternate" hreflang="th" href="https://wang-sam-mo-explorer.com/th/wang-sam-mo-services" />
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.85</priority>
+  <changefreq>weekly</changefreq>
 </url>
+
+<url>
+  <loc>https://wang-sam-mo-explorer.com/wang-sam-mo-jobs</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://wang-sam-mo-explorer.com/wang-sam-mo-jobs" />
+  <xhtml:link rel="alternate" hreflang="th" href="https://wang-sam-mo-explorer.com/th/wang-sam-mo-jobs" />
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>daily</changefreq>
+</url>
+
+<url>
+  <loc>https://wang-sam-mo-explorer.com/about-wang-sam-mo</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://wang-sam-mo-explorer.com/about-wang-sam-mo" />
+  <xhtml:link rel="alternate" hreflang="th" href="https://wang-sam-mo-explorer.com/th/about-wang-sam-mo" />
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.70</priority>
+  <changefreq>monthly</changefreq>
+</url>
+
+<!-- Product Category Pages -->
+<url>
+  <loc>https://wang-sam-mo-explorer.com/local-products/pickled-vegetables-wang-sam-mo</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://wang-sam-mo-explorer.com/local-products/pickled-vegetables-wang-sam-mo" />
+  <xhtml:link rel="alternate" hreflang="th" href="https://wang-sam-mo-explorer.com/th/local-products/pickled-vegetables-wang-sam-mo" />
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+</url>
+
+<url>
+  <loc>https://wang-sam-mo-explorer.com/local-products/issan-handicrafts-wang-sam-mo</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://wang-sam-mo-explorer.com/local-products/issan-handicrafts-wang-sam-mo" />
+  <xhtml:link rel="alternate" hreflang="th" href="https://wang-sam-mo-explorer.com/th/local-products/issan-handicrafts-wang-sam-mo" />
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+</url>
+
+<url>
+  <loc>https://wang-sam-mo-explorer.com/local-products/organic-tea-wang-sam-mo</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://wang-sam-mo-explorer.com/local-products/organic-tea-wang-sam-mo" />
+  <xhtml:link rel="alternate" hreflang="th" href="https://wang-sam-mo-explorer.com/th/local-products/organic-tea-wang-sam-mo" />
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+</url>
+
+<!-- Legacy URLs for backward compatibility -->
+<url>
+  <loc>https://wang-sam-mo-explorer.com/attractions</loc>
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.50</priority>
+  <changefreq>never</changefreq>
+</url>
+
+<url>
+  <loc>https://wang-sam-mo-explorer.com/restaurants</loc>
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.50</priority>
+  <changefreq>never</changefreq>
+</url>
+
+<url>
+  <loc>https://wang-sam-mo-explorer.com/services</loc>
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.50</priority>
+  <changefreq>never</changefreq>
+</url>
+
+<url>
+  <loc>https://wang-sam-mo-explorer.com/jobs</loc>
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.50</priority>
+  <changefreq>never</changefreq>
+</url>
+
+<url>
+  <loc>https://wang-sam-mo-explorer.com/about</loc>
+  <lastmod>2025-01-25T00:00:00+00:00</lastmod>
+  <priority>0.50</priority>
+  <changefreq>never</changefreq>
+</url>
+
 </urlset>
