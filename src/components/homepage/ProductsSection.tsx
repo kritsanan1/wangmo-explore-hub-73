@@ -47,7 +47,7 @@ const ProductsSection = () => {
 
       if (error) throw error;
       
-      // Sample data based on requested Wang Sam Mo products
+      // Sample data based on requested Wang Sam Mo products with pricing
       setProducts([
         {
           id: '1',
@@ -59,7 +59,8 @@ const ProductsSection = () => {
           price_range: '300 THB/set',
           service_type: 'Local Food',
           location: { address: 'Wang Sam Mo Market, Udon Thani' },
-          featured: true
+          featured: true,
+          price: 300 // Add actual price for cart
         },
         {
           id: '2',
@@ -71,7 +72,8 @@ const ProductsSection = () => {
           price_range: '500 THB',
           service_type: 'Handicrafts',
           location: { address: 'Wang Sam Mo Craft Center' },
-          featured: true
+          featured: true,
+          price: 500 // Add actual price for cart
         },
         {
           id: '3',
@@ -83,7 +85,8 @@ const ProductsSection = () => {
           price_range: '200 THB/pack',
           service_type: 'Natural Products',
           location: { address: 'Wang Sam Mo Hills' },
-          featured: true
+          featured: true,
+          price: 200 // Add actual price for cart
         }
       ]);
     } catch (error) {
