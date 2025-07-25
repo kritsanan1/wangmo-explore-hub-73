@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Star, ShoppingBag, Package } from "lucide-react";
+import { MapPin, Star, ShoppingBag, Package, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useCart } from "@/contexts/CartContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useToast } from "@/hooks/use-toast";
 import SectionHeader from "./SectionHeader";
 
 type Product = {
@@ -70,7 +73,7 @@ const ProductsSection = () => {
         {
           id: '3',
           name: 'Local Tea',
-          name_thai: 'ชาท้องถิ่นว��งสามหมอ',
+          name_thai: 'ชาท้องถิ่นวังสามหมอ',
           description: 'Taste Wang Sam Mo\'s organic tea, grown in the hills, 200 THB/pack.',
           images: ['https://images.unsplash.com/photo-1517022812141-2362096515c9?w=400&h=300&fit=crop'],
           rating: 4.7,
