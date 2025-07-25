@@ -16,6 +16,29 @@ const Index = () => {
     <Layout>
       <HeroSection />
 
+      {/* Large Banner Ad above History Section */}
+      <div className="py-6 bg-gradient-to-br from-amber-50/50 to-green-50/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-4">
+            <p className="text-xs text-muted-foreground">Sponsored Content</p>
+          </div>
+          <div className="flex justify-center">
+            <div className="w-full max-w-6xl bg-gradient-to-r from-amber-100 to-green-100 rounded-lg p-6 text-center border-2 border-amber-200">
+              <h3 className="text-3xl font-bold text-amber-800 mb-3">Bua Daeng Homestay</h3>
+              <p className="text-amber-700 mb-4 text-lg">Stay with us in Wang Sam Mo! Garden views, WiFi, breakfast included. #tourderwang</p>
+              <div className="text-4xl font-bold text-green-600 mb-4">800 THB/night</div>
+              <p className="text-amber-600 font-medium">Call 089-6220962 • Experience authentic Issan hospitality</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* History Section */}
+      <HistorySection />
+
+      {/* Photo Album Section */}
+      <PhotoAlbumSection />
+
       {/* Premium/Enterprise Ad Banner - Above Attractions */}
       <AdSection />
 
