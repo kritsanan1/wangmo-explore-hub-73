@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock, MapPin, Users, Calendar, Star } from "lucide-react";
 import { Link } from "react-router-dom";
-import { SEOHeading } from "@/components/seo/SEOHeading";
+import SEOHeading from "@/components/seo/SEOHeading";
 
 const History = () => {
   const shareOnFacebook = () => {
@@ -13,7 +13,7 @@ const History = () => {
 
   const shareOnInstagram = () => {
     // Copy to clipboard for Instagram sharing
-    const text = "Discover the rich history of Wang Sam Mo #ที่นี่วังสามหม��� #ทัวร์เดอวัง\n\n" + window.location.href;
+    const text = "Discover the rich history of Wang Sam Mo #ที่นี่วังสามหมอ #ทัวร์เดอวัง\n\n" + window.location.href;
     navigator.clipboard.writeText(text);
     alert("Link copied to clipboard! You can now paste it in your Instagram post.");
   };
