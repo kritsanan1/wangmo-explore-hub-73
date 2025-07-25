@@ -1,33 +1,67 @@
 # Wang Sam Mo Explorer Hub - Robots.txt
+# Tourism guide for Wang Sam Mo, Udon Thani, Thailand
+
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /private/
+Disallow: /api/
 Disallow: /*.json$
-Disallow: /*?*
+Disallow: /*?*utm_*
+Disallow: /*?*sessionid*
+Disallow: /*?*sid*
+Disallow: /cart*
+Disallow: /checkout*
 
-# Sitemap location
+# Allow important category parameters for SEO
+Allow: /*?category=pickled
+Allow: /*?category=handicrafts
+Allow: /*?category=tea
+
+# Sitemap locations
 Sitemap: https://wang-sam-mo-explorer.com/sitemap.xml
+Sitemap: https://wang-sam-mo-explorer.com/sitemap-images.xml
+Sitemap: https://wang-sam-mo-explorer.com/sitemap-th.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
 
-# Specific bot instructions
+# Specific bot instructions for SEO optimization
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
+Crawl-delay: 0.5
+Request-rate: 1/1s
 
-User-agent: Bingbot  
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+Request-rate: 1/2s
+
+User-agent: Slurp
 Allow: /
 Crawl-delay: 1
 
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Social media bots
 User-agent: Twitterbot
 Allow: /
+Crawl-delay: 0.5
 
 User-agent: facebookexternalhit
 Allow: /
+Crawl-delay: 0.5
 
-# Block malicious bots
+User-agent: LinkedInBot
+Allow: /
+
+# SEO tools (allowed for monitoring)
+User-agent: MozBot
+Allow: /
+
+# Block aggressive/commercial crawlers
 User-agent: SemrushBot
 Disallow: /
 
@@ -36,3 +70,16 @@ Disallow: /
 
 User-agent: MJ12bot
 Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: YandexBot
+Crawl-delay: 2
+
+# Additional SEO information
+# Host: wang-sam-mo-explorer.com
+# Preferred domain: wang-sam-mo-explorer.com
