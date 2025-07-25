@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Star, Wifi, Car, Users, Coffee } from "lucide-react";
+import { MapPin, Star, Wifi, Car, Users, Coffee, Phone, Home, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import OptimizedImage from "@/components/ui/optimized-image";
 import SectionHeader from "./SectionHeader";
 
 type Homestay = {
@@ -20,6 +21,15 @@ type Homestay = {
   };
   features: string[];
   featured: boolean;
+  details: {
+    bedrooms: number;
+    amenities: string[];
+    contact?: string;
+    distance_from_airport?: string;
+    special_features?: string[];
+    includes_breakfast?: boolean;
+    pet_friendly?: boolean;
+  };
 };
 
 const HomestaysSection = () => {
@@ -42,43 +52,61 @@ const HomestaysSection = () => {
 
       if (error) throw error;
       
-      // Sample data based on Google search results for Wang Sam Mo homestays
+      // Enhanced Wang Sam Mo homestays with detailed information
       setHomestays([
         {
           id: '1',
           name: 'Bua Daeng Homestay',
-          name_thai: 'บัวแดง โฮมสเตย์',
-          description: 'Stay at Bua Daeng Homestay, 800 THB/night, with WiFi and garden views, 33 km from Udon Thani.',
+          name_thai: 'บ��วแดง โฮมสเตย์',
+          description: 'Cozy homestay in Wang Sam Mo, 33 km from Udon Thani, with serene garden views. Perfect for families or couples. #tourderwang',
           images: ['https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=300&fit=crop'],
           rating: 4.7,
           price_range: '800 THB/night',
           location: { address: 'Wang Sam Mo, 33 km from Udon Thani' },
-          features: ['WiFi', 'Garden Views', 'Home Cooking'],
-          featured: true
+          features: ['WiFi', 'Garden Views', 'Free Parking'],
+          featured: true,
+          details: {
+            bedrooms: 2,
+            amenities: ['WiFi', 'Air conditioning', 'Free parking', 'Garden views'],
+            contact: '089-6220962',
+            includes_breakfast: true,
+            pet_friendly: true,
+          }
         },
         {
           id: '2',
           name: 'Baan Suan Rim Nam Homestay',
           name_thai: 'บ้านสวนริมน้ำ โฮมสเตย์',
-          description: 'Relax at Baan Suan Rim Nam, Wang Yai, with rafting and nature. Call 089-6220962.',
+          description: 'Relax by the river in Wang Yai, Wang Sam Mo, with rafting and nature activities. #ที่นี่วังสามหมอ',
           images: ['https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=300&fit=crop'],
           rating: 4.6,
-          price_range: '750 THB/night',
+          price_range: '800 THB/night',
           location: { address: 'Wang Yai, Wang Sam Mo' },
-          features: ['Riverside', 'Rafting', 'Nature Tours'],
-          featured: true
+          features: ['Riverside', 'Rafting', 'WiFi'],
+          featured: true,
+          details: {
+            bedrooms: 2,
+            amenities: ['WiFi', 'Terrace', 'Free parking'],
+            contact: '089-6220962',
+            special_features: ['Rafting access', 'River views'],
+          }
         },
         {
           id: '3',
           name: 'Ban Diam Homestay',
           name_thai: 'บ้านเดี่ยม โฮมสเตย์',
-          description: 'Experience Ban Diam Homestay in Kumphawapi, modern amenities, ~800 THB/night.',
+          description: 'Modern comfort in Kumphawapi, near Wang Sam Mo, with easy access to local attractions. #ทัวร์เดอวัง',
           images: ['https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=300&fit=crop'],
           rating: 4.5,
           price_range: '800 THB/night',
           location: { address: 'Kumphawapi, Wang Sam Mo' },
-          features: ['Modern Amenities', 'Cultural Experience', 'WiFi'],
-          featured: true
+          features: ['Modern Amenities', 'WiFi', 'Parking'],
+          featured: true,
+          details: {
+            bedrooms: 2,
+            amenities: ['WiFi', 'Air conditioning', 'Parking'],
+            distance_from_airport: '35 km from Udon Thani Airport',
+          }
         }
       ]);
     } catch (error) {
