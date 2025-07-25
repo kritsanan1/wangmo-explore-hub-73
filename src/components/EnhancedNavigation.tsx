@@ -37,6 +37,7 @@ const EnhancedNavigation = () => {
   const { language, toggleLanguage, t } = useLanguage();
   const { isOpen, isActive, toggleMenu, closeMenu, shouldShowMobileMenu } = useNavigation();
   const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
   const { contactInfo, logo } = NAVIGATION_CONFIG;
   
