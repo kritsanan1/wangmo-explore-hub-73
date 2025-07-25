@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -77,14 +77,14 @@ const EnhancedNavigation = () => {
     };
   }, []);
 
-  const handleCartClick = () => {
+  const handleCartClick = useCallback(() => {
     setIsMiniCartOpen(!isMiniCartOpen);
-  };
+  }, [isMiniCartOpen]);
 
   return (
-    <nav className="bg-gradient-to-r from-amber-50 via-red-50 to-green-50 shadow-lg border-b-2 border-amber-200 sticky top-0 z-50 backdrop-blur-sm">
+    <nav className="bg-gradient-to-r from-amber-50 via-red-50 to-green-50 shadow-lg border-b-2 border-amber-200 sticky top-0 z-50 backdrop-blur-sm will-change-transform">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-14 sm:h-16">
           {/* Logo */}
           <NavigationLogo logo={logo} />
 
@@ -227,7 +227,7 @@ const EnhancedNavigation = () => {
 
         {/* Mobile Navigation */}
         {shouldShowMobileMenu && (
-          <div className="md:hidden py-4 border-t border-amber-200 bg-gradient-to-r from-amber-50 to-green-50">
+          <div className="md:hidden py-3 border-t border-amber-200 bg-gradient-to-r from-amber-50 to-green-50 animate-in slide-in-from-top-2 duration-200">
             <div className="space-y-2">
               {navItems.map((item) => (
                 <div key={item.name}>
@@ -281,8 +281,14 @@ const EnhancedNavigation = () => {
 
       {/* Mobile Mini Cart */}
       {isMiniCartOpen && (
-        <div className="md:hidden fixed inset-0 top-16 z-40 bg-black bg-opacity-50" onClick={() => setIsMiniCartOpen(false)}>
-          <div className="bg-white max-w-sm mx-auto mt-4 rounded-lg shadow-lg" onClick={e => e.stopPropagation()}>
+        <div
+          className="md:hidden fixed inset-0 top-14 sm:top-16 z-40 bg-black/50 backdrop-blur-sm animate-in fade-in-0 duration-200"
+          onClick={() => setIsMiniCartOpen(false)}
+        >
+          <div
+            className="bg-white max-w-sm mx-auto mt-4 rounded-lg shadow-lg animate-in slide-in-from-top-4 duration-300"
+            onClick={e => e.stopPropagation()}
+          >
             <MiniCart onClose={() => setIsMiniCartOpen(false)} />
           </div>
         </div>
