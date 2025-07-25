@@ -195,12 +195,22 @@ const ProductsSection = () => {
                   <MapPin className="h-3 w-3 mr-1" />
                   <span className="line-clamp-1">{product.location.address}</span>
                 </div>
-                <Link to="/services">
-                  <Button className="w-full bg-primary hover:bg-primary/90">
-                    <ShoppingBag className="mr-2 h-4 w-4" />
-                    Shop Now
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    onClick={() => handleAddToCart(product)}
+                    className="bg-amber-600 hover:bg-amber-700 text-white"
+                    size="sm"
+                  >
+                    <Plus className="mr-1 h-4 w-4" />
+                    {t('products.add')}
                   </Button>
-                </Link>
+                  <Link to="/services">
+                    <Button variant="outline" size="sm" className="w-full">
+                      <ShoppingBag className="mr-1 h-4 w-4" />
+                      View
+                    </Button>
+                  </Link>
+                </div>
               </CardContent>
             </Card>
           ))}
