@@ -53,7 +53,7 @@ const ProductsSection = () => {
         {
           id: '1',
           name: 'Pickled Vegetables',
-          name_thai: 'ผักดองวังสามหมอ',
+          name_thai: 'ผักดองวังสามหม��',
           description: 'Buy authentic Wang Sam Mo pickled vegetables, 300 THB/set. #วังสามหมอ',
           images: ['https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=300&fit=crop'],
           rating: 4.8,
@@ -153,67 +153,82 @@ const ProductsSection = () => {
           linkText="Shop Now"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={product.images[0] || '/placeholder.svg'}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute top-3 right-3">
-                  <Badge className="bg-white/90 text-foreground">
-                    <Star className="h-3 w-3 mr-1 fill-yellow-400 text-yellow-400" />
-                    {product.rating}
-                  </Badge>
+        <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product) => (
+              <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={product.images[0] || '/placeholder.svg'}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-3 right-3">
+                    <Badge className="bg-white/90 text-foreground">
+                      <Star className="h-3 w-3 mr-1 fill-yellow-400 text-yellow-400" />
+                      {product.rating}
+                    </Badge>
+                  </div>
+                  <div className="absolute top-3 left-3">
+                    <Badge className={getProductTypeColor(product.service_type)}>
+                      <Package className="h-3 w-3 mr-1" />
+                      {product.service_type}
+                    </Badge>
+                  </div>
+                  <div className="absolute bottom-3 left-3">
+                    <Badge className="bg-primary/90 text-primary-foreground">
+                      {product.price_range}
+                    </Badge>
+                  </div>
                 </div>
-                <div className="absolute top-3 left-3">
-                  <Badge className={getProductTypeColor(product.service_type)}>
-                    <Package className="h-3 w-3 mr-1" />
-                    {product.service_type}
-                  </Badge>
-                </div>
-                <div className="absolute bottom-3 left-3">
-                  <Badge className="bg-primary/90 text-primary-foreground">
-                    {product.price_range}
-                  </Badge>
-                </div>
-              </div>
-              
-              <CardContent className="p-4">
-                <h3 className="font-bold text-lg text-foreground mb-1 line-clamp-1">
-                  {product.name}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-2 font-medium">
-                  {product.name_thai}
-                </p>
-                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                  {product.description}
-                </p>
-                <div className="flex items-center text-xs text-muted-foreground mb-4">
-                  <MapPin className="h-3 w-3 mr-1" />
-                  <span className="line-clamp-1">{product.location.address}</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <Button
-                    onClick={() => handleAddToCart(product)}
-                    className="bg-amber-600 hover:bg-amber-700 text-white"
-                    size="sm"
-                  >
-                    <Plus className="mr-1 h-4 w-4" />
-                    {t('products.add')}
-                  </Button>
-                  <Link to="/services">
-                    <Button variant="outline" size="sm" className="w-full">
-                      <ShoppingBag className="mr-1 h-4 w-4" />
-                      View
+
+                <CardContent className="p-4">
+                  <h3 className="font-bold text-lg text-foreground mb-1 line-clamp-1">
+                    {product.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-2 font-medium">
+                    {product.name_thai}
+                  </p>
+                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                    {product.description}
+                  </p>
+                  <div className="flex items-center text-xs text-muted-foreground mb-4">
+                    <MapPin className="h-3 w-3 mr-1" />
+                    <span className="line-clamp-1">{product.location.address}</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button
+                      onClick={() => handleAddToCart(product)}
+                      className="bg-amber-600 hover:bg-amber-700 text-white"
+                      size="sm"
+                    >
+                      <Plus className="mr-1 h-4 w-4" />
+                      {t('products.add')}
                     </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                    <Link to="/services">
+                      <Button variant="outline" size="sm" className="w-full">
+                        <ShoppingBag className="mr-1 h-4 w-4" />
+                        View
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* View Cart Button */}
+          <div className="text-center">
+            <Link to="/cart">
+              <Button
+                size="lg"
+                className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3"
+              >
+                <ShoppingBag className="mr-2 h-5 w-5" />
+                {t('cart.view')} ({itemCount} items)
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
