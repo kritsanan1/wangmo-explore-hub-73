@@ -123,58 +123,31 @@ const AdSection = ({ className }: AdSectionProps) => {
         </div>
 
         {/* Medium Banner Ads Grid */}
-        {basicAds.length > 0 && (
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-foreground">Local Marketplace</h3>
-              {basicAds.length > 1 && (
-                <div className="flex gap-1">
-                  {basicAds.map((_, index) => (
-                    <div
-                      key={index}
-                      className={cn(
-                        "w-2 h-2 rounded-full transition-colors cursor-pointer",
-                        index === currentMediumAdIndex ? "bg-secondary" : "bg-muted"
-                      )}
-                      onClick={() => setCurrentMediumAdIndex(index)}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-            
-            {/* Responsive Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Current rotating ad */}
-              <BannerAd
-                ad={basicAds[currentMediumAdIndex]}
-                variant="medium"
-                onAdClick={handleAdClick}
+        <div>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-foreground">Local Marketplace</h3>
+          </div>
+
+          {/* Responsive Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <BannerAdDisplay
+              placement="homepage_sidebar"
+              size="medium"
+            />
+            <div className="hidden md:block">
+              <BannerAdDisplay
+                placement="homepage_sidebar"
+                size="medium"
               />
-              
-              {/* Additional static ads for larger screens */}
-              {basicAds.length > 1 && (
-                <div className="hidden md:block">
-                  <BannerAd
-                    ad={basicAds[(currentMediumAdIndex + 1) % basicAds.length]}
-                    variant="medium"
-                    onAdClick={handleAdClick}
-                  />
-                </div>
-              )}
-              
-              {basicAds.length > 2 && (
-                <div className="hidden lg:block">
-                  <BannerAd
-                    ad={basicAds[(currentMediumAdIndex + 2) % basicAds.length]}
-                    variant="medium"
-                    onAdClick={handleAdClick}
-                  />
-                </div>
-              )}
+            </div>
+            <div className="hidden lg:block">
+              <BannerAdDisplay
+                placement="homepage_sidebar"
+                size="medium"
+              />
             </div>
           </div>
-        )}
+        </div>
 
         {/* Call to Action for Businesses */}
         <div className="mt-12 text-center bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-6">
