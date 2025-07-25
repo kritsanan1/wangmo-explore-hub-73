@@ -44,6 +44,12 @@ const translations = {
     'products.handicrafts.name': 'Issan Handicrafts',
     'products.tea.name': 'Local Tea',
     'products.add': 'Add to Cart',
+    'products.view': 'View Details',
+    'products.shop_treasures': 'Shop Wang Sam Mo\'s Local Treasures',
+    'products.weight': 'Weight',
+    'products.size': 'Size',
+    'products.shelf_life': 'Shelf life',
+    'products.made_by': 'Made by',
     
     // General
     'currency': 'THB',
@@ -53,7 +59,7 @@ const translations = {
   },
   th: {
     // Navigation
-    'nav.home': 'หน้าแร��',
+    'nav.home': 'หน้าแรก',
     'nav.attractions': 'สถานที่ท่องเที่ยว',
     'nav.restaurants': 'ร้านอาหาร',
     'nav.services': 'บริการ',
@@ -86,12 +92,18 @@ const translations = {
     'products.handicrafts.name': 'งานฝีมืออีสาน',
     'products.tea.name': 'ชาท้องถิ่น',
     'products.add': 'เพิ่มในตะกร้า',
+    'products.view': 'ดูรายละเอียด',
+    'products.shop_treasures': 'ช้อปสมบัติท้องถิ่นวังสามหมอ',
+    'products.weight': 'น้ำหนัก',
+    'products.size': 'ขนาด',
+    'products.shelf_life': 'อายุการเก็บ',
+    'products.made_by': 'ผลิตโดย',
     
     // General
     'currency': 'บาท',
     'back': 'ย้อนกลับ',
     'close': 'ปิด',
-    'loading': 'กำลังโหลด...',
+    'loading': 'กำลังโ���ลด...',
   }
 };
 
