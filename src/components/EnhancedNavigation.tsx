@@ -297,4 +297,4 @@ const EnhancedNavigation = () => {
   );
 };
 
-export default EnhancedNavigation;
+export default memo(EnhancedNavigation);
