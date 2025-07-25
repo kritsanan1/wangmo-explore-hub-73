@@ -2,6 +2,8 @@ import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Star, MapPin, Award } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/hooks/use-toast";
 import ServiceFilters from "@/components/services/ServiceFilters";
 import ServiceCard, { ServiceType } from "@/components/services/ServiceCard";
 import ProductCard, { ProductType } from "@/components/services/ProductCard";
@@ -14,6 +16,8 @@ const Services = () => {
   const [activeTab, setActiveTab] = useState("services");
   const [selectedService, setSelectedService] = useState<ServiceType | null>(null);
   const [bookingDialogOpen, setBookingDialogOpen] = useState(false);
+  const { addItem } = useCart();
+  const { toast } = useToast();
 
   // Sample data for services
   const services: ServiceType[] = [
@@ -95,52 +99,56 @@ const Services = () => {
     }
   ];
 
-  // Sample data for products
+  // Enhanced Wang Sam Mo products matching homepage data
   const products: ProductType[] = [
     {
       id: "1",
-      name: "Traditional Pickled Vegetables",
-      name_thai: "ผักดองพื้นบ้าน",
-      description: "Authentic Isan-style pickled vegetables made with local ingredients and traditional methods.",
-      category: "food",
-      price: 150,
+      name: "Wang Sam Mo Pickled Vegetables",
+      name_thai: "ผักดองวังสามหมอ",
+      description: "Authentic Issan pickled vegetables, made with local ingredients from Wang Sam Mo farms. Perfect for gifting or home cooking. #tourderwang",
+      category: "pickled",
+      price: 300,
       currency: "THB",
-      images: ["https://images.unsplash.com/photo-1609501676725-7186f36a7f27?w=400&h=300&fit=crop"],
-      vendor: "Auntie Mali's Kitchen",
-      rating: 4.7,
+      images: ["https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=300&fit=crop"],
+      vendor: "Local cooperative",
+      rating: 4.8,
       featured: true,
       in_stock: true,
-      ingredients: ["Cabbage", "Carrots", "Garlic", "Chili", "Fish sauce"],
-      origin: "Wang Sam Mo, Udon Thani"
+      ingredients: ["Fresh vegetables", "Local spices", "Traditional fermentation"],
+      origin: "Wang Sam Mo Market, Udon Thani",
+      details: "500g jar, shelf-stable for 6 months"
     },
     {
       id: "2",
-      name: "Handwoven Isan Silk Scarf",
-      name_thai: "ผ้าไหมอีสานทอมือ",
-      description: "Beautiful handwoven silk scarf with traditional patterns from local artisans.",
-      category: "handicraft",
-      price: 850,
+      name: "Issan Handwoven Crafts",
+      name_thai: "งานฝีมืออีสาน",
+      description: "Unique handwoven crafts by Wang Sam Mo artisans, showcasing Issan culture. Ideal as souvenirs. #ที่นี่วังสามหมอ",
+      category: "handicrafts",
+      price: 500,
       currency: "THB",
-      images: ["https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=300&fit=crop"],
-      vendor: "Wang Sam Mo Handicrafts",
-      rating: 4.9,
+      images: ["https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=300&fit=crop"],
+      vendor: "Local artisans",
+      rating: 4.6,
       featured: true,
       in_stock: true,
-      origin: "Wang Sam Mo Weaving Cooperative"
+      origin: "Wang Sam Mo Craft Center",
+      details: "30x20 cm, made from natural materials"
     },
     {
       id: "3",
-      name: "Wang Sam Mo Coffee Beans",
-      name_thai: "เมล็ดกาแฟวังสามหมอ",
-      description: "Premium arabica coffee beans grown in the highlands around Wang Sam Mo.",
-      category: "food",
-      price: 280,
+      name: "Wang Sam Mo Organic Tea",
+      name_thai: "ชาท้องถิ่นวังสามหมอ",
+      description: "Organic tea grown in the hills of Wang Sam Mo, offering a refreshing taste of nature. #ทัวร์เดอวัง",
+      category: "tea",
+      price: 200,
       currency: "THB",
-      images: ["https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&h=300&fit=crop"],
-      vendor: "Mountain Coffee Farm",
-      rating: 4.5,
+      images: ["https://images.unsplash.com/photo-1517022812141-2362096515c9?w=400&h=300&fit=crop"],
+      vendor: "Hill farmers",
+      rating: 4.7,
+      featured: true,
       in_stock: true,
-      origin: "Wang Sam Mo Mountains"
+      origin: "Wang Sam Mo Hills",
+      details: "100g pack, caffeine-free, eco-friendly packaging"
     }
   ];
 
@@ -189,8 +197,21 @@ const Services = () => {
   };
 
   const handleAddToCart = (product: ProductType, quantity: number) => {
-    // Cart functionality will be implemented later
-    console.log(`Adding ${quantity}x ${product.name} to cart`);
+    for (let i = 0; i < quantity; i++) {
+      addItem({
+        id: product.id,
+        name: product.name,
+        name_thai: product.name_thai,
+        price: product.price,
+        image: product.images[0] || '/placeholder.svg',
+        category: product.category
+      });
+    }
+
+    toast({
+      title: "Added to cart",
+      description: `${quantity}x ${product.name} added to cart`,
+    });
   };
 
   return (
