@@ -40,13 +40,22 @@ serve(async (req) => {
     if (!user?.email) throw new Error("User not authenticated or email not available");
     logStep("User authenticated", { userId: user.id, email: user.email });
 
-    const { plan_type, advertisement_data } = await req.json();
-    
+    const { plan_type, billing_cycle = "monthly", advertisement_data } = await req.json();
+
     // Validate plan type and get pricing
     const planPricing = {
-      basic: { amount: 50000, name: "Basic Plan" }, // 500 THB in cents
-      premium: { amount: 200000, name: "Premium Plan" }, // 2,000 THB in cents
-      enterprise: { amount: 500000, name: "Enterprise Plan" } // 5,000 THB in cents
+      basic: {
+        monthly: { amount: 50000, name: "Basic Plan (Monthly)" }, // 500 THB in cents
+        yearly: { amount: 500000, name: "Basic Plan (Yearly)" }   // 5,000 THB in cents (17% discount)
+      },
+      premium: {
+        monthly: { amount: 200000, name: "Premium Plan (Monthly)" }, // 2,000 THB in cents
+        yearly: { amount: 2000000, name: "Premium Plan (Yearly)" }   // 20,000 THB in cents (17% discount)
+      },
+      enterprise: {
+        monthly: { amount: 500000, name: "Enterprise Plan (Monthly)" }, // 5,000 THB in cents
+        yearly: { amount: 5000000, name: "Enterprise Plan (Yearly)" }   // 50,000 THB in cents (17% discount)
+      }
     };
 
     if (!planPricing[plan_type as keyof typeof planPricing]) {
