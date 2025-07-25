@@ -3,12 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Star, Clock } from "lucide-react";
 import { Tables } from "@/integrations/supabase/types";
-import { 
-  getCategoryStyles, 
-  getAttractionImage, 
-  formatRating, 
-  getLocationString 
+import {
+  getCategoryStyles,
+  getAttractionImage,
+  formatRating,
+  getLocationString
 } from "@/lib/attraction-utils";
+import AttractionDetailCard from "./AttractionDetailCard";
 
 type AttractionCardProps = {
   attraction: Tables<'attractions'>;
