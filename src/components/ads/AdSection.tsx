@@ -110,34 +110,17 @@ const AdSection = ({ className }: AdSectionProps) => {
           </p>
         </div>
 
-        {/* Large Banner Ad (Premium) */}
-        {premiumAds.length > 0 && (
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-foreground">Featured Sponsors</h3>
-              {premiumAds.length > 1 && (
-                <div className="flex gap-1">
-                  {premiumAds.map((_, index) => (
-                    <div
-                      key={index}
-                      className={cn(
-                        "w-2 h-2 rounded-full transition-colors cursor-pointer",
-                        index === currentLargeAdIndex ? "bg-primary" : "bg-muted"
-                      )}
-                      onClick={() => setCurrentLargeAdIndex(index)}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-            <BannerAd
-              ad={premiumAds[currentLargeAdIndex]}
-              variant="large"
-              onAdClick={handleAdClick}
-              className="w-full"
-            />
+        {/* Large Banner Ad (Premium/Enterprise) */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-foreground">Featured Sponsors</h3>
           </div>
-        )}
+          <BannerAdDisplay
+            placement="homepage_banner"
+            size="large"
+            className="w-full"
+          />
+        </div>
 
         {/* Medium Banner Ads Grid */}
         {basicAds.length > 0 && (
