@@ -172,9 +172,9 @@ const ProductsSection = () => {
     <section className="py-12 bg-gradient-to-br from-accent/20 to-secondary/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Wang Sam Mo Local Products"
-          titleThai="ผลิตภัณฑ์ท้องถิ่นวังสามหมอ"
-          subtitle="Authentic pickled vegetables, Issan handicrafts, and organic tea from the hills #วังสามหมอ"
+          title="Shop Wang Sam Mo's Local Treasures"
+          titleThai="ช้อปผลิตภัณฑ์ท้องถิ่นวังสามหมอ"
+          subtitle="Authentic pickled vegetables, handwoven crafts, and organic tea from local artisans #วังสามหมอ"
           linkTo="/services"
           linkText="Shop Now"
         />
@@ -218,9 +218,37 @@ const ProductsSection = () => {
                   <p className="text-sm text-muted-foreground mb-2 font-medium">
                     {product.name_thai}
                   </p>
-                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                  <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
                     {product.description}
                   </p>
+
+                  {/* Product Details */}
+                  <div className="text-xs text-muted-foreground mb-3 space-y-1">
+                    {product.details.weight && (
+                      <div className="flex items-center">
+                        <span className="font-medium mr-2">Weight:</span>
+                        <span>{product.details.weight}</span>
+                      </div>
+                    )}
+                    {product.details.dimensions && (
+                      <div className="flex items-center">
+                        <span className="font-medium mr-2">Size:</span>
+                        <span>{product.details.dimensions}</span>
+                      </div>
+                    )}
+                    {product.details.shelf_life && (
+                      <div className="flex items-center">
+                        <span className="font-medium mr-2">Shelf life:</span>
+                        <span>{product.details.shelf_life}</span>
+                      </div>
+                    )}
+                    {product.details.producer && (
+                      <div className="flex items-center">
+                        <span className="font-medium mr-2">Made by:</span>
+                        <span>{product.details.producer}</span>
+                      </div>
+                    )}
+                  </div>
                   <div className="flex items-center text-xs text-muted-foreground mb-4">
                     <MapPin className="h-3 w-3 mr-1" />
                     <span className="line-clamp-1">{product.location.address}</span>
