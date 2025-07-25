@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MapPin, Calendar, Star, Clock } from "lucide-react";
+import { PageTitle, SectionTitle, SubsectionTitle } from "@/components/seo/SEOHeading";
+import Breadcrumb from "@/components/seo/Breadcrumb";
 import AttractionCard from "@/components/AttractionCard";
 import CulturalHighlights from "@/components/CulturalHighlights";
 import AttractionsMap from "@/components/AttractionsMap";
@@ -33,17 +35,21 @@ const Attractions = () => {
     <Layout>
       <div className="min-h-screen py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Hero Section */}
+          <Breadcrumb />
+
+          {/* Hero Section with SEO-optimized headings */}
           <div className="text-center mb-16">
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              Attractions & Culture
-            </h1>
-            <h2 className="text-xl lg:text-2xl text-muted-foreground mb-6">
-              สถานที่ท่องเที่ยวและวัฒนธรรม
-            </h2>
+            <PageTitle keywords={['Wang Sam Mo attractions', 'Phasuk Temple', 'Wang Yai Park', 'Udon Thani temples', 'วังสามหมอ สถานที่']}>
+              Wang Sam Mo Attractions & Ancient Temples | Udon Thani #วังสามหมอ
+            </PageTitle>
+            <SectionTitle className="text-xl lg:text-2xl text-muted-foreground mb-6 font-normal">
+              สถานที่ท่องเที่ยวและวัฒนธรรม • Cultural Heritage & Natural Beauty
+            </SectionTitle>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Explore the rich cultural heritage and natural beauty of Wang Sam Mo. 
-              From ancient temples to scenic parks, discover the authentic charm of Udon Thani.
+              Explore the rich cultural heritage and natural beauty of Wang Sam Mo, Udon Thani.
+              From <strong>ancient temples like Phasuk Temple</strong> to scenic <strong>Wang Yai Park</strong>,
+              discover the authentic charm of this hidden gem. Experience traditional Thai culture,
+              mystical caves, and authentic rural life in our cultural adventure destination.
             </p>
           </div>
 
@@ -74,10 +80,10 @@ const Attractions = () => {
                   {/* Featured Attractions */}
                   {featuredAttractions.length > 0 && (
                     <section>
-                      <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
+                      <SectionTitle keywords={['featured attractions', 'Wang Sam Mo highlights']} className="text-2xl font-semibold mb-6 flex items-center gap-2">
                         <Star className="h-6 w-6 text-primary" />
-                        Featured Attractions
-                      </h3>
+                        Featured Wang Sam Mo Attractions
+                      </SectionTitle>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {featuredAttractions.map((attraction) => (
                           <AttractionCard key={attraction.id} attraction={attraction} />
@@ -88,7 +94,7 @@ const Attractions = () => {
 
                   {/* All Attractions */}
                   <section>
-                    <h3 className="text-2xl font-semibold mb-6">All Attractions</h3>
+                    <SectionTitle keywords={['Wang Sam Mo attractions', 'Udon Thani tourism']} className="text-2xl font-semibold mb-6">All Wang Sam Mo Attractions</SectionTitle>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {regularAttractions.map((attraction) => (
                         <AttractionCard key={attraction.id} attraction={attraction} />
