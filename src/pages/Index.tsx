@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/HeroSection";
 import AdSection from "@/components/ads/AdSection";
+import BannerAdDisplay from "@/components/ads/BannerAdDisplay";
 import AttractionsSection from "@/components/homepage/AttractionsSection";
 import RestaurantsSection from "@/components/homepage/RestaurantsSection";
 import ServicesSection from "@/components/homepage/ServicesSection";
