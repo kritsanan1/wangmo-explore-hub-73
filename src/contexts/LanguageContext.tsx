@@ -25,6 +25,10 @@ const translations = {
     'nav.products.pickled': 'Pickled Vegetables',
     'nav.products.handicrafts': 'Handicrafts',
     'nav.products.tea': 'Local Tea',
+
+    // About dropdown
+    'nav.about.history': 'History',
+    'nav.about.team': 'Our Team',
     
     // Cart
     'cart.title': 'Shopping Cart',
@@ -100,7 +104,7 @@ const translations = {
     'products.made_by': 'ผลิตโดย',
     
     // General
-    'currency': 'บาท',
+    'currency': 'บา��',
     'back': 'ย้อนกลับ',
     'close': 'ปิด',
     'loading': 'กำลังโ���ลด...',
