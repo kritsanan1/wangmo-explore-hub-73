@@ -1,31 +1,5 @@
 import Layout from "@/components/Layout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
-import { 
-  Upload, 
-  Eye, 
-  MousePointer, 
-  Calendar, 
-  CreditCard, 
-  CheckCircle, 
-  Clock,
-  DollarSign,
-  TrendingUp,
-  Star,
-  AlertCircle,
-  Crown,
-  Zap
-} from "lucide-react";
+import AdvertisingDashboard from "@/components/pricing/AdvertisingDashboard";
 
 const AdDashboard = () => {
   const [adPlan, setAdPlan] = useState<"basic" | "premium" | "enterprise">("basic");
@@ -357,7 +331,7 @@ const AdDashboard = () => {
                     <Label htmlFor="adTitleThai">Ad Title (Thai)</Label>
                     <Input
                       id="adTitleThai"
-                      placeholder="e.g., พักที่บัวแดง โฮมสเตย์ - 800 บาท/คืน"
+                      placeholder="e.g., พักที��บัวแดง โฮมสเตย์ - 800 บาท/คืน"
                       maxLength={60}
                       value={adData.titleThai}
                       onChange={(e) => setAdData({...adData, titleThai: e.target.value})}
