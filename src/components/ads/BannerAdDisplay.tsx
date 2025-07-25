@@ -72,6 +72,41 @@ const BannerAdDisplay = ({ placement, size = "medium", className = "" }: BannerA
         setAd(data[0]);
         // Track view
         trackAdView(data[0].id);
+      } else {
+        // Fallback to sample Wang Sam Mo ads for demonstration
+        const sampleAds = [
+          {
+            id: 'sample-1',
+            title: 'Stay with us, 800 THB/night! #ทัวร์เดอวัง',
+            title_thai: 'พักกับเราเพียง 800 บาท/คืน!',
+            business_name: 'Bua Daeng Homestay',
+            description: 'Experience authentic Wang Sam Mo culture with garden views and home-cooked meals.',
+            description_thai: 'สัมผัสวัฒนธรรมวังสามหมออย่างแท้จริง',
+            link_url: '/services',
+            image_url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=300&fit=crop',
+            plan_type: 'premium',
+            status: 'active'
+          },
+          {
+            id: 'sample-2',
+            title: 'Taste Issan cuisine!',
+            title_thai: 'ลิ้มรสอาหารอีสาน!',
+            business_name: 'Sahamui & Sons',
+            description: 'Authentic Issan dishes at Sahamui & Sons, Wang Sam Mo favorite.',
+            description_thai: 'อาหารอีสานแท้ที่ส��หมุยและลูก',
+            link_url: '/restaurants',
+            image_url: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop',
+            plan_type: 'basic',
+            status: 'active'
+          }
+        ];
+
+        // Choose ad based on placement
+        const selectedAd = placement === 'homepage_banner'
+          ? sampleAds[0]  // Premium ad for banner
+          : sampleAds[1]; // Basic ad for sidebar
+
+        setAd(selectedAd);
       }
     } catch (error) {
       console.error('Error in fetchActiveAd:', error);
