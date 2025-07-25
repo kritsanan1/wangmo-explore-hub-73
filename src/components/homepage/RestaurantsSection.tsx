@@ -141,11 +141,11 @@ const RestaurantsSection = () => {
     <section className="py-12 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Featured Restaurants"
-          titleThai="ร้านอาหารแนะนำ"
-          subtitle="Taste authentic Issan cuisine and local specialties"
+          title="Wang Sam Mo Restaurants"
+          titleThai="ร้านอาหารวังสามหมอ"
+          subtitle="Taste authentic Issan dishes and traditional Thai flavors in the heart of Udon Thani"
           linkTo="/restaurants"
-          linkText="View All Restaurants"
+          linkText="See All Restaurants"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
