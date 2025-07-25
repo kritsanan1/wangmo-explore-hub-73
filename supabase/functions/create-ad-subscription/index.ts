@@ -58,12 +58,13 @@ serve(async (req) => {
       }
     };
 
-    if (!planPricing[plan_type as keyof typeof planPricing]) {
-      throw new Error("Invalid plan type");
+    const planCategory = planPricing[plan_type as keyof typeof planPricing];
+    if (!planCategory || !planCategory[billing_cycle as keyof typeof planCategory]) {
+      throw new Error("Invalid plan type or billing cycle");
     }
 
-    const selectedPlan = planPricing[plan_type as keyof typeof planPricing];
-    logStep("Plan selected", { plan_type, amount: selectedPlan.amount });
+    const selectedPlan = planCategory[billing_cycle as keyof typeof planCategory];
+    logStep("Plan selected", { plan_type, billing_cycle, amount: selectedPlan.amount });
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
     
