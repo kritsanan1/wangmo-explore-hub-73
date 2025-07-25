@@ -8,6 +8,8 @@ import ServicesSection from "@/components/homepage/ServicesSection";
 import HomestaysSection from "@/components/homepage/HomestaysSection";
 import ProductsSection from "@/components/homepage/ProductsSection";
 import JobsSection from "@/components/homepage/JobsSection";
+import HistorySection from "@/components/homepage/HistorySection";
+import PhotoAlbumSection from "@/components/homepage/PhotoAlbumSection";
 
 const Index = () => {
   return (
