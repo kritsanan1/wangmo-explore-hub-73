@@ -135,11 +135,11 @@ const JobsSection = () => {
     <section className="py-12 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Job Opportunities"
-          titleThai="โอกาสการทำงาน"
-          subtitle="Join the growing tourism industry in Wang Sam Mo"
+          title="Wang Sam Mo Jobs"
+          titleThai="งานวังสามหมอ"
+          subtitle="Join Baan Suan Rim Nam team or become a cultural tour guide in Udon Thani's tourism hub"
           linkTo="/jobs"
-          linkText="View All Jobs"
+          linkText="See All Jobs"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
