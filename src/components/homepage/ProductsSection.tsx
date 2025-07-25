@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useCart } from "@/contexts/CartContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
+import OptimizedImage from "@/components/ui/optimized-image";
 import SectionHeader from "./SectionHeader";
 
 type Product = {
@@ -107,7 +108,8 @@ const ProductsSection = () => {
     }
   };
 
-  const handleAddToCart = (product: Product) => {
+  // Memoized add to cart function
+  const handleAddToCart = useCallback((product: Product) => {
     if (product.price) {
       addItem({
         id: product.id,
@@ -123,7 +125,7 @@ const ProductsSection = () => {
         description: `${product.name} added to cart`,
       });
     }
-  };
+  }, [addItem, toast, t]);
 
   if (loading) {
     return (
@@ -158,10 +160,13 @@ const ProductsSection = () => {
             {products.map((product) => (
               <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
-                  <img
+                  <OptimizedImage
                     src={product.images[0] || '/placeholder.svg'}
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    width={400}
+                    height={300}
+                    lazy={true}
                   />
                   <div className="absolute top-3 right-3">
                     <Badge className="bg-white/90 text-foreground">
