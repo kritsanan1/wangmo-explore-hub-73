@@ -8,7 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Upload, 
   Eye, 
@@ -20,11 +22,120 @@ import {
   DollarSign,
   TrendingUp,
   Star,
-  AlertCircle
+  AlertCircle,
+  Crown,
+  Zap
 } from "lucide-react";
 
 const AdDashboard = () => {
-  const [adPlan, setAdPlan] = useState<"basic" | "premium">("basic");
+  const [adPlan, setAdPlan] = useState<"basic" | "premium" | "enterprise">("basic");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [adData, setAdData] = useState({
+    businessName: "",
+    title: "",
+    titleThai: "",
+    description: "",
+    descriptionThai: "",
+    linkUrl: "",
+    imageUrl: "",
+    videoUrl: ""
+  });
+  const { toast } = useToast();
+
+  // Check for successful payment on page load
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get('success');
+    const sessionId = urlParams.get('session_id');
+    
+    if (success === 'true' && sessionId) {
+      verifyPayment(sessionId);
+      // Clean up URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
+
+  const verifyPayment = async (sessionId: string) => {
+    try {
+      const { data, error } = await supabase.functions.invoke('verify-payment', {
+        body: { session_id: sessionId }
+      });
+
+      if (error) throw error;
+
+      if (data.success && data.advertisement_activated) {
+        toast({
+          title: "Payment Successful!",
+          description: "Your advertisement has been activated and is now live.",
+        });
+      }
+    } catch (error) {
+      console.error('Error verifying payment:', error);
+      toast({
+        title: "Verification Error",
+        description: "There was an issue verifying your payment. Please contact support.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleCreateAd = async () => {
+    if (!adData.businessName || !adData.title || !adData.description || !adData.linkUrl) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('create-ad-subscription', {
+        body: {
+          plan_type: adPlan,
+          advertisement_data: {
+            business_name: adData.businessName,
+            title: adData.title,
+            title_thai: adData.titleThai,
+            description: adData.description,
+            description_thai: adData.descriptionThai,
+            link_url: adData.linkUrl,
+            image_url: adData.imageUrl,
+            video_url: adData.videoUrl
+          }
+        }
+      });
+
+      if (error) throw error;
+
+      // Redirect to Stripe Checkout
+      if (data.url) {
+        window.open(data.url, '_blank');
+      }
+    } catch (error) {
+      console.error('Error creating ad:', error);
+      toast({
+        title: "Error",
+        description: "Failed to create advertisement. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const getPlanDetails = (plan: string) => {
+    switch (plan) {
+      case "premium":
+        return { price: "2,000", size: "728x90", features: "Large banner + Analytics" };
+      case "enterprise":
+        return { price: "5,000", size: "Multiple sizes", features: "All sections + Priority" };
+      default:
+        return { price: "500", size: "300x250", features: "Medium banner" };
+    }
+  };
 
   // Mock data for user's existing ads
   const userAds = [
@@ -205,13 +316,14 @@ const AdDashboard = () => {
                   {/* Plan Selection */}
                   <div className="space-y-2">
                     <Label>Select Ad Plan</Label>
-                    <Select value={adPlan} onValueChange={(value: "basic" | "premium") => setAdPlan(value)}>
+                    <Select value={adPlan} onValueChange={(value: "basic" | "premium" | "enterprise") => setAdPlan(value)}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="basic">Basic Plan - 500 THB/month (300x250px)</SelectItem>
                         <SelectItem value="premium">Premium Plan - 2,000 THB/month (728x90px + Analytics)</SelectItem>
+                        <SelectItem value="enterprise">Enterprise Plan - 5,000 THB/month (All sections + Priority)</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -222,30 +334,63 @@ const AdDashboard = () => {
                     <Input
                       id="businessName"
                       placeholder="Enter your business name"
+                      value={adData.businessName}
+                      onChange={(e) => setAdData({...adData, businessName: e.target.value})}
                     />
                   </div>
 
                   {/* Ad Title */}
                   <div className="space-y-2">
-                    <Label htmlFor="adTitle">Ad Title</Label>
+                    <Label htmlFor="adTitle">Ad Title (English)</Label>
                     <Input
                       id="adTitle"
                       placeholder="e.g., Stay at Bua Daeng Homestay - 800 THB/night"
                       maxLength={60}
+                      value={adData.title}
+                      onChange={(e) => setAdData({...adData, title: e.target.value})}
                     />
                     <p className="text-sm text-muted-foreground">Maximum 60 characters</p>
                   </div>
 
+                  {/* Ad Title Thai */}
+                  <div className="space-y-2">
+                    <Label htmlFor="adTitleThai">Ad Title (Thai)</Label>
+                    <Input
+                      id="adTitleThai"
+                      placeholder="e.g., พักที่บัวแดง โฮมสเตย์ - 800 บาท/คืน"
+                      maxLength={60}
+                      value={adData.titleThai}
+                      onChange={(e) => setAdData({...adData, titleThai: e.target.value})}
+                    />
+                    <p className="text-sm text-muted-foreground">Optional - Maximum 60 characters</p>
+                  </div>
+
                   {/* Ad Description */}
                   <div className="space-y-2">
-                    <Label htmlFor="adDescription">Description</Label>
+                    <Label htmlFor="adDescription">Description (English)</Label>
                     <Textarea
                       id="adDescription"
                       placeholder="Describe your business offering..."
                       rows={3}
                       maxLength={120}
+                      value={adData.description}
+                      onChange={(e) => setAdData({...adData, description: e.target.value})}
                     />
                     <p className="text-sm text-muted-foreground">Maximum 120 characters</p>
+                  </div>
+
+                  {/* Ad Description Thai */}
+                  <div className="space-y-2">
+                    <Label htmlFor="adDescriptionThai">Description (Thai)</Label>
+                    <Textarea
+                      id="adDescriptionThai"
+                      placeholder="อธิบายเกี่ยวกับธุรกิจของคุณ..."
+                      rows={3}
+                      maxLength={120}
+                      value={adData.descriptionThai}
+                      onChange={(e) => setAdData({...adData, descriptionThai: e.target.value})}
+                    />
+                    <p className="text-sm text-muted-foreground">Optional - Maximum 120 characters</p>
                   </div>
 
                   {/* Website Link */}
@@ -255,6 +400,8 @@ const AdDashboard = () => {
                       id="adLink"
                       type="url"
                       placeholder="https://your-website.com or phone number"
+                      value={adData.linkUrl}
+                      onChange={(e) => setAdData({...adData, linkUrl: e.target.value})}
                     />
                   </div>
 
@@ -298,9 +445,7 @@ const AdDashboard = () => {
                     <div className="bg-muted/30 rounded-lg p-4">
                       <div className="flex justify-between items-center mb-2">
                         <span>Plan:</span>
-                        <span className="font-medium">
-                          {adPlan === "premium" ? "Premium" : "Basic"} 
-                        </span>
+                        <span className="font-medium capitalize">{adPlan}</span>
                       </div>
                       <div className="flex justify-between items-center mb-2">
                         <span>Duration:</span>
@@ -308,13 +453,18 @@ const AdDashboard = () => {
                       </div>
                       <div className="flex justify-between items-center font-semibold text-lg">
                         <span>Total:</span>
-                        <span>{adPlan === "premium" ? "2,000" : "500"} THB</span>
+                        <span>{getPlanDetails(adPlan).price} THB</span>
                       </div>
                     </div>
                     
-                    <Button className="w-full" size="lg">
+                    <Button 
+                      className="w-full" 
+                      size="lg"
+                      onClick={handleCreateAd}
+                      disabled={isSubmitting}
+                    >
                       <CreditCard className="mr-2 h-4 w-4" />
-                      Proceed to Payment
+                      {isSubmitting ? "Processing..." : "Proceed to Payment"}
                     </Button>
                   </div>
                 </CardContent>
@@ -323,7 +473,7 @@ const AdDashboard = () => {
 
             {/* Pricing Tab */}
             <TabsContent value="pricing" className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-3 gap-6">
                 {/* Basic Plan */}
                 <Card>
                   <CardHeader className="text-center">
@@ -405,6 +555,56 @@ const AdDashboard = () => {
                     </ul>
                     <Button className="w-full">
                       Choose Premium Plan
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Enterprise Plan */}
+                <Card className="border-2 border-thai-red shadow-xl relative">
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-thai-red text-thai-red-foreground">
+                    <Crown className="h-3 w-3 mr-1" />
+                    Enterprise
+                  </Badge>
+                  <CardHeader className="text-center">
+                    <CardTitle className="text-xl flex items-center justify-center gap-2">
+                      <Zap className="h-5 w-5 text-thai-red" />
+                      Enterprise Plan
+                    </CardTitle>
+                    <CardDescription>Dominate all sections with maximum reach</CardDescription>
+                    <div className="flex items-baseline justify-center gap-1 mt-4">
+                      <span className="text-3xl font-bold text-thai-red">5,000</span>
+                      <span className="text-sm text-muted-foreground">THB/month</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 mb-6">
+                      <li className="flex items-start gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span>Multiple banner sizes across all sections</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span>Homepage + Services + Restaurants + Attractions</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span>Priority in search results</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span>Detailed analytics & demographics</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span>Video ad support</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <Crown className="h-4 w-4 text-thai-red mt-0.5 flex-shrink-0" />
+                        <span>Dedicated support</span>
+                      </li>
+                    </ul>
+                    <Button className="w-full bg-thai-red hover:bg-thai-red/90 text-thai-red-foreground">
+                      Choose Enterprise Plan
                     </Button>
                   </CardContent>
                 </Card>
