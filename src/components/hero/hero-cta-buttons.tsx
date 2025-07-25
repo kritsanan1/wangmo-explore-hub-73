@@ -16,24 +16,25 @@ export function HeroCTAButtons() {
         </Button>
       </Link>
       
-      <Link to="/restaurants">
-        <Button 
-          size="lg" 
-          variant="outline" 
+      <Link to="/services">
+        <Button
+          size="lg"
+          variant="outline"
           className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:border-white/50 shadow-lg hover:shadow-xl transition-all duration-300"
         >
-          Find Restaurants
+          <Home className="mr-2 h-4 w-4" />
+          Book a Homestay
         </Button>
       </Link>
-      
-      <Link to="/jobs">
-        <Button 
-          size="lg" 
-          variant="outline" 
+
+      <Link to="/services">
+        <Button
+          size="lg"
+          variant="outline"
           className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:border-white/50 shadow-lg hover:shadow-xl transition-all duration-300"
         >
-          <Briefcase className="mr-2 h-4 w-4" />
-          Job Listings
+          <ShoppingBag className="mr-2 h-4 w-4" />
+          Shop Local Products
         </Button>
       </Link>
     </div>
