@@ -28,6 +28,9 @@ type Product = {
 const ProductsSection = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const { addItem } = useCart();
+  const { t } = useLanguage();
+  const { toast } = useToast();
 
   useEffect(() => {
     fetchFeaturedProducts();
