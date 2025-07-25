@@ -57,7 +57,7 @@ const HomestaysSection = () => {
         {
           id: '1',
           name: 'Bua Daeng Homestay',
-          name_thai: 'บ��วแดง โฮมสเตย์',
+          name_thai: 'บัวแดง โฮมสเตย์',
           description: 'Cozy homestay in Wang Sam Mo, 33 km from Udon Thani, with serene garden views. Perfect for families or couples. #tourderwang',
           images: ['https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=300&fit=crop'],
           rating: 4.7,
@@ -149,9 +149,9 @@ const HomestaysSection = () => {
     <section className="py-12 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Wang Sam Mo Homestays"
-          titleThai="โฮมสเตย์วังสามหมอ"
-          subtitle="Experience authentic Thai culture with rafting, garden views, and traditional hospitality"
+          title="Stay in Wang Sam Mo"
+          titleThai="ที่พักในวังสามหมอ"
+          subtitle="Experience authentic Thai hospitality with garden views, rafting, and traditional comfort #วังสามหมอ"
           linkTo="/services"
           linkText="Book a Homestay"
         />
@@ -160,10 +160,13 @@ const HomestaysSection = () => {
           {homestays.map((homestay) => (
             <Card key={homestay.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
               <div className="relative h-48 overflow-hidden">
-                <img
+                <OptimizedImage
                   src={homestay.images[0] || '/placeholder.svg'}
                   alt={homestay.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  width={400}
+                  height={300}
+                  lazy={true}
                 />
                 <div className="absolute top-3 right-3">
                   <Badge className="bg-white/90 text-foreground">
@@ -185,9 +188,35 @@ const HomestaysSection = () => {
                 <p className="text-sm text-muted-foreground mb-2 font-medium">
                   {homestay.name_thai}
                 </p>
-                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
                   {homestay.description}
                 </p>
+
+                {/* Homestay Details */}
+                <div className="text-xs text-muted-foreground mb-3 space-y-1">
+                  <div className="flex items-center">
+                    <Home className="h-3 w-3 mr-2" />
+                    <span>{homestay.details.bedrooms} bedrooms</span>
+                  </div>
+                  {homestay.details.contact && (
+                    <div className="flex items-center">
+                      <Phone className="h-3 w-3 mr-2" />
+                      <span>{homestay.details.contact}</span>
+                    </div>
+                  )}
+                  {homestay.details.includes_breakfast && (
+                    <div className="flex items-center">
+                      <Coffee className="h-3 w-3 mr-2" />
+                      <span>Breakfast included</span>
+                    </div>
+                  )}
+                  {homestay.details.pet_friendly && (
+                    <div className="flex items-center">
+                      <Heart className="h-3 w-3 mr-2" />
+                      <span>Pet-friendly</span>
+                    </div>
+                  )}
+                </div>
                 <div className="flex items-center text-xs text-muted-foreground mb-3">
                   <MapPin className="h-3 w-3 mr-1" />
                   <span className="line-clamp-1">{homestay.location.address}</span>
