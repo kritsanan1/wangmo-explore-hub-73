@@ -1,14 +1,27 @@
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/HeroSection";
-import FeaturedAttractions from "@/components/FeaturedAttractions";
 import AdSection from "@/components/ads/AdSection";
+import AttractionsSection from "@/components/homepage/AttractionsSection";
+import RestaurantsSection from "@/components/homepage/RestaurantsSection";
+import ServicesSection from "@/components/homepage/ServicesSection";
+import HomestaysSection from "@/components/homepage/HomestaysSection";
+import ProductsSection from "@/components/homepage/ProductsSection";
+import JobsSection from "@/components/homepage/JobsSection";
 
 const Index = () => {
   return (
     <Layout>
       <HeroSection />
+      {/* Premium/Enterprise Ad Banner - Above Attractions */}
       <AdSection />
-      <FeaturedAttractions />
+      
+      {/* Main Content Sections */}
+      <AttractionsSection />
+      <RestaurantsSection />
+      <ServicesSection />
+      <HomestaysSection />
+      <ProductsSection />
+      <JobsSection />
     </Layout>
   );
 };

@@ -1,0 +1,160 @@
+import { useEffect, useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { MapPin, Star, Camera } from "lucide-react";
+import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import SectionHeader from "./SectionHeader";
+
+type Attraction = {
+  id: string;
+  name: string;
+  name_thai: string;
+  description: string;
+  images: string[];
+  rating: number;
+  location: {
+    address: string;
+    coordinates: { lat: number; lng: number };
+  };
+  featured: boolean;
+};
+
+const AttractionsSection = () => {
+  const [attractions, setAttractions] = useState<Attraction[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchFeaturedAttractions();
+  }, []);
+
+  const fetchFeaturedAttractions = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('attractions')
+        .select('*')
+        .eq('featured', true)
+        .limit(4);
+
+      if (error) throw error;
+      
+      // Transform the data to match our type
+      const transformedData = (data || []).map((item: any) => ({
+        ...item,
+        location: typeof item.location === 'string' 
+          ? { address: item.location, coordinates: { lat: 0, lng: 0 } }
+          : item.location || { address: 'Wang Sam Mo, Udon Thani', coordinates: { lat: 17.4, lng: 102.8 } }
+      }));
+      
+      setAttractions(transformedData);
+    } catch (error) {
+      console.error('Error fetching attractions:', error);
+      // Fallback to sample data
+      setAttractions([
+        {
+          id: '1',
+          name: 'Wang Yai Park',
+          name_thai: 'สวนวังใหญ่',
+          description: 'Beautiful public park with lotus ponds, walking trails, and traditional Thai architecture perfect for relaxation.',
+          images: ['/src/assets/wang-yai-park-attraction.jpg'],
+          rating: 4.5,
+          location: { address: 'Wang Sam Mo, Udon Thani', coordinates: { lat: 17.4, lng: 102.8 } },
+          featured: true
+        },
+        {
+          id: '2',
+          name: 'Phasuk Temple',
+          name_thai: 'วัดผาสุก',
+          description: 'Ancient Buddhist temple featuring traditional Issan architecture and peaceful meditation gardens.',
+          images: ['/src/assets/phasuk-temple.jpg'],
+          rating: 4.3,
+          location: { address: 'Wang Sam Mo, Udon Thani', coordinates: { lat: 17.4, lng: 102.8 } },
+          featured: true
+        }
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <section className="py-12 bg-gradient-to-br from-accent/20 to-secondary/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="animate-pulse">
+            <div className="h-8 bg-muted rounded w-1/3 mb-4"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="h-64 bg-muted rounded-lg"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="py-12 bg-gradient-to-br from-accent/20 to-secondary/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          title="Discover Attractions"
+          titleThai="สำรวจสถานที่ท่องเที่ยว"
+          subtitle="Explore the beautiful sights and cultural landmarks of Wang Sam Mo"
+          linkTo="/attractions"
+          linkText="Explore More"
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {attractions.map((attraction) => (
+            <Card key={attraction.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={attraction.images[0] || '/placeholder.svg'}
+                  alt={attraction.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute top-3 right-3">
+                  <Badge className="bg-white/90 text-foreground">
+                    <Star className="h-3 w-3 mr-1 fill-yellow-400 text-yellow-400" />
+                    {attraction.rating}
+                  </Badge>
+                </div>
+                <div className="absolute bottom-3 left-3">
+                  <Badge variant="secondary" className="bg-primary/90 text-primary-foreground">
+                    <Camera className="h-3 w-3 mr-1" />
+                    Featured
+                  </Badge>
+                </div>
+              </div>
+              
+              <CardContent className="p-4">
+                <h3 className="font-bold text-lg text-foreground mb-1 line-clamp-1">
+                  {attraction.name}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-2 font-medium">
+                  {attraction.name_thai}
+                </p>
+                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                  {attraction.description}
+                </p>
+                <div className="flex items-center text-xs text-muted-foreground mb-4">
+                  <MapPin className="h-3 w-3 mr-1" />
+                  <span className="line-clamp-1">{attraction.location.address}</span>
+                </div>
+                <Link to="/attractions">
+                  <Button className="w-full bg-primary hover:bg-primary/90">
+                    Explore More
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default AttractionsSection;
