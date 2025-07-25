@@ -56,44 +56,32 @@ const ServicesSection = () => {
       setServices(transformedData);
     } catch (error) {
       console.error('Error fetching services:', error);
-      // Fallback to sample data
+      // Fallback to sample data based on requested services
       setServices([
         {
           id: '1',
-          name: 'Wang Sam Mo Tour Guide',
-          name_thai: 'ไกด์ท่องเที่ยววังสามหมอ',
-          description: 'Experienced local tour guide offering cultural tours and historical insights of Wang Sam Mo district.',
-          images: ['https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=800&h=400&fit=crop'],
+          name: 'Local Tour Guide',
+          name_thai: 'ไกด์ท้องถิ่น',
+          description: 'Explore Wang Sam Mo with expert guides. Book a cultural tour today.',
+          images: ['https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=400&h=300&fit=crop'],
           rating: 4.8,
           service_type: 'Tour Guide',
-          price_range: '500-1500 THB/day',
+          price_range: '800-1200 THB/day',
           location: { address: 'Wang Sam Mo, Udon Thani' },
           contact_info: { phone: '+66 87 123 4567' },
           featured: true
         },
         {
           id: '2',
-          name: 'Tuk-Tuk Rental Service',
-          name_thai: 'บริการเช่าตุ๊กตุ๊ก',
-          description: 'Convenient tuk-tuk rental for exploring local attractions and markets at your own pace.',
-          images: ['https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=400&fit=crop'],
+          name: 'Tuk-Tuk Rental',
+          name_thai: 'บริการเช่��ตุ๊กตุ๊ก',
+          description: 'Rent a tuk-tuk (~300 THB/day) for a fun way to discover Wang Sam Mo.',
+          images: ['https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'],
           rating: 4.5,
           service_type: 'Transportation',
-          price_range: '300-800 THB/day',
+          price_range: '300 THB/day',
           location: { address: 'Wang Sam Mo Market' },
           contact_info: { phone: '+66 89 765 4321' },
-          featured: true
-        },
-        {
-          id: '3',
-          name: 'Traditional Massage',
-          name_thai: 'นวดแผนไทย',
-          description: 'Authentic Thai traditional massage therapy by certified local practitioners.',
-          images: ['https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=400&fit=crop'],
-          rating: 4.7,
-          service_type: 'Wellness',
-          price_range: '200-500 THB/hour',
-          location: { address: 'Wang Sam Mo Health Center' },
           featured: true
         }
       ]);
