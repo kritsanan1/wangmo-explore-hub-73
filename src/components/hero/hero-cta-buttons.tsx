@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MapPin, Briefcase } from "lucide-react";
+import { ArrowRight, MapPin, Home, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function HeroCTAButtons() {
