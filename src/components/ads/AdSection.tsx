@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import BannerAd, { AdType } from "./BannerAd";
+import BannerAdDisplay from "./BannerAdDisplay";
 import { cn } from "@/lib/utils";
 
 // Sample ad data for Wang Sam Mo businesses
