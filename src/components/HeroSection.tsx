@@ -22,17 +22,17 @@ const HeroSection = () => {
           {/* Main Heading */}
           <div className="space-y-4">
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight">
-              Discover
+              Discover Wang Sam Mo
               <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Wang Sam Mo
+                Nature, Culture & Adventure
               </span>
             </h1>
             <h2 className="text-xl sm:text-2xl lg:text-3xl text-white/90 font-light">
-              ที่นี่ วังสามหมอ - Where Culture Meets Adventure
+              #ที่นี่วังสามหมอ #ทัวร์เดอวัง #tourderwang
             </h2>
             <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-              Experience the authentic beauty of Udon Thani's hidden gem. From ancient temples to local cuisine, 
-              discover unforgettable moments in Wang Sam Mo.
+              Experience rafting at Wang Yai Park, explore ancient temples, and taste authentic Issan cuisine.
+              Your gateway to unforgettable moments in Udon Thani's cultural heart.
             </p>
           </div>
 
