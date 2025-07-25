@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Star, MapPin, Award } from "lucide-react";
@@ -10,6 +11,7 @@ import ProductCard, { ProductType } from "@/components/services/ProductCard";
 import ServiceBookingDialog from "@/components/services/ServiceBookingDialog";
 
 const Services = () => {
+  const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedLocation, setSelectedLocation] = useState("all");
@@ -18,6 +20,15 @@ const Services = () => {
   const [bookingDialogOpen, setBookingDialogOpen] = useState(false);
   const { addItem } = useCart();
   const { toast } = useToast();
+
+  // Handle URL parameters for category filtering
+  useEffect(() => {
+    const category = searchParams.get('category');
+    if (category) {
+      setActiveTab('products');
+      setSelectedCategory(category);
+    }
+  }, [searchParams]);
 
   // Sample data for services
   const services: ServiceType[] = [
