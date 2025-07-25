@@ -72,6 +72,10 @@ const App = () => (
                   <Route path="/about" element={<About />} />
                   <Route path="/cart" element={<Cart />} />
 
+                  {/* Content routes */}
+                  <Route path="/history" element={<History />} />
+                  <Route path="/photo-album" element={<PhotoAlbum />} />
+
                   {/* Admin routes */}
                   <Route path="/ad-dashboard" element={<AdDashboard />} />
                   <Route path="/seo-dashboard" element={<SEODashboardPage />} />
