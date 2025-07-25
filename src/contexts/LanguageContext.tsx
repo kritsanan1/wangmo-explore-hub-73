@@ -76,7 +76,11 @@ const translations = {
     // Products dropdown
     'nav.products.pickled': 'ผักดอง',
     'nav.products.handicrafts': 'งานฝีมือ',
-    'nav.products.tea': 'ชาท้องถิ่น',
+    'nav.products.tea': 'ช���ท้องถิ่น',
+
+    // About dropdown
+    'nav.about.history': 'ประวัติศาสตร์',
+    'nav.about.team': 'ทีมงานของเรา',
     
     // Cart
     'cart.title': 'ตะกร้าสินค้า',
@@ -104,7 +108,7 @@ const translations = {
     'products.made_by': 'ผลิตโดย',
     
     // General
-    'currency': 'บา��',
+    'currency': 'บาท',
     'back': 'ย้อนกลับ',
     'close': 'ปิด',
     'loading': 'กำลังโ���ลด...',
