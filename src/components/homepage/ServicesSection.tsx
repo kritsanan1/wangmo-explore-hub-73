@@ -74,7 +74,7 @@ const ServicesSection = () => {
         {
           id: '2',
           name: 'Tuk-Tuk Rental',
-          name_thai: 'บริการเช่��ตุ๊กตุ๊ก',
+          name_thai: 'บริการเช่าตุ๊กตุ๊ก',
           description: 'Rent a tuk-tuk (~300 THB/day) for a fun way to discover Wang Sam Mo.',
           images: ['https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'],
           rating: 4.5,
@@ -121,11 +121,11 @@ const ServicesSection = () => {
     <section className="py-12 bg-gradient-to-br from-secondary/10 to-accent/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Local Services"
-          titleThai="บริการท้องถิ่น"
-          subtitle="Professional services to enhance your Wang Sam Mo experience"
+          title="Wang Sam Mo Services"
+          titleThai="บริการวังสามหมอ"
+          subtitle="Expert local guides and convenient transportation to explore Udon Thani's cultural heart"
           linkTo="/services"
-          linkText="View All Services"
+          linkText="See All Services"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
