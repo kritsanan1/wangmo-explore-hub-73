@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Navigation from "./Navigation";
+import EnhancedNavigation from "./EnhancedNavigation";
 import Footer from "./Footer";
 
 interface LayoutProps {
