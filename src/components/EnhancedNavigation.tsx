@@ -62,7 +62,16 @@ const EnhancedNavigation = () => {
       ]
     },
     { name: t('nav.jobs'), href: '/jobs', icon: Briefcase },
-    { name: t('nav.about'), href: '/about', icon: Info },
+    {
+      name: t('nav.about'),
+      href: '/about',
+      icon: Info,
+      hasDropdown: true,
+      dropdownItems: [
+        { name: t('nav.about.history'), href: '/history' },
+        { name: t('nav.about.team'), href: '/about' }
+      ]
+    },
   ];
 
   useEffect(() => {
