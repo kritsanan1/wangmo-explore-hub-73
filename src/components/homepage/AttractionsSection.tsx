@@ -109,11 +109,11 @@ const AttractionsSection = () => {
     <section className="py-12 bg-gradient-to-br from-accent/20 to-secondary/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Discover Attractions"
-          titleThai="สำรวจสถานที่ท่องเที่ยว"
-          subtitle="Explore the beautiful sights and cultural landmarks of Wang Sam Mo"
+          title="Explore Wang Sam Mo Attractions"
+          titleThai="สำรวจสถานที่ท่องเที่ยววังสามหมอ"
+          subtitle="Discover rafting adventures, ancient temples, and mystical caves in Udon Thani's cultural heart #วังสามหมอ"
           linkTo="/attractions"
-          linkText="Explore More"
+          linkText="See All Attractions"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
