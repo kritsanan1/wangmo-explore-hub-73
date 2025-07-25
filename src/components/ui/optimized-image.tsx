@@ -10,6 +10,8 @@ interface OptimizedImageProps {
   lazy?: boolean;
   quality?: number;
   placeholder?: string;
+  keywords?: string[];
+  location?: string;
 }
 
 const OptimizedImage = ({
@@ -20,7 +22,9 @@ const OptimizedImage = ({
   height,
   lazy = true,
   quality = 80,
-  placeholder = '/placeholder.svg'
+  placeholder = '/placeholder.svg',
+  keywords = [],
+  location = 'Wang Sam Mo, Udon Thani'
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(!lazy);
@@ -75,12 +79,16 @@ const OptimizedImage = ({
     return originalSrc;
   };
 
+  // Enhanced alt text with location and keywords for SEO
+  const enhancedAlt = `${alt}${location ? ` in ${location}` : ''}${keywords.length ? ` - ${keywords.slice(0, 3).join(', ')}` : ''}`;
+
   return (
     <div className={cn("relative overflow-hidden", className)}>
       <img
         ref={imgRef}
         src={getOptimizedSrc(imageSrc)}
-        alt={alt}
+        alt={enhancedAlt}
+        title={alt}
         width={width}
         height={height}
         className={cn(
@@ -91,6 +99,8 @@ const OptimizedImage = ({
         loading={lazy ? "lazy" : "eager"}
         decoding="async"
         onLoad={() => setIsLoaded(true)}
+        data-keywords={keywords.join(',')}
+        data-location={location}
       />
       
       {/* Loading placeholder overlay */}
