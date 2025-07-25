@@ -46,24 +46,6 @@ const Index = () => {
       <AttractionsSection />
       <RestaurantsSection />
       <ServicesSection />
-
-      {/* Large Banner Ad above Homestays Section */}
-      <div className="py-6 bg-gradient-to-br from-amber-50/50 to-green-50/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-4">
-            <p className="text-xs text-muted-foreground">Sponsored Content</p>
-          </div>
-          <div className="flex justify-center">
-            <div className="w-full max-w-4xl bg-gradient-to-r from-amber-100 to-green-100 rounded-lg p-6 text-center border-2 border-amber-200">
-              <h3 className="text-2xl font-bold text-amber-800 mb-2">Bua Daeng Homestay</h3>
-              <p className="text-amber-700 mb-4">Stay with us in Wang Sam Mo! Garden views, WiFi, breakfast included.</p>
-              <div className="text-3xl font-bold text-green-600 mb-4">800 THB/night</div>
-              <p className="text-sm text-amber-600">Call 089-6220962 • #tourderwang</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <HomestaysSection />
 
       {/* Medium Banner Ad between Homestays and Products */}
