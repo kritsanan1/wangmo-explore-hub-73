@@ -24,7 +24,16 @@ type Product = {
     address: string;
   };
   featured: boolean;
-  price?: number; // Add price for cart functionality
+  price: number;
+  details: {
+    weight?: string;
+    shelf_life?: string;
+    producer?: string;
+    dimensions?: string;
+    material?: string;
+    packaging?: string;
+    caffeine_free?: boolean;
+  };
 };
 
 const ProductsSection = () => {
@@ -49,46 +58,61 @@ const ProductsSection = () => {
 
       if (error) throw error;
       
-      // Sample data based on requested Wang Sam Mo products with pricing
+      // Enhanced Wang Sam Mo products with detailed information
       setProducts([
         {
           id: '1',
-          name: 'Pickled Vegetables',
+          name: 'Wang Sam Mo Pickled Vegetables',
           name_thai: 'ผักดองวังสามหมอ',
-          description: 'Buy authentic Wang Sam Mo pickled vegetables, 300 THB/set. #วังสามหมอ',
+          description: 'Authentic Issan pickled vegetables, made with local ingredients from Wang Sam Mo farms. Perfect for gifting or home cooking. #tourderwang',
           images: ['https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=300&fit=crop'],
           rating: 4.8,
           price_range: '300 THB/set',
           service_type: 'Local Food',
           location: { address: 'Wang Sam Mo Market, Udon Thani' },
           featured: true,
-          price: 300 // Add actual price for cart
+          price: 300,
+          details: {
+            weight: '500g jar',
+            shelf_life: '6 months',
+            producer: 'Local cooperative',
+          }
         },
         {
           id: '2',
-          name: 'Issan Handicrafts',
+          name: 'Issan Handwoven Crafts',
           name_thai: 'งานฝีมืออีสาน',
-          description: 'Shop unique Issan handicrafts, perfect souvenirs, ~500 THB.',
+          description: 'Unique handwoven crafts by Wang Sam Mo artisans, showcasing Issan culture. Ideal as souvenirs. #ที่นี่วังสามหมอ',
           images: ['https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=300&fit=crop'],
           rating: 4.6,
           price_range: '500 THB',
           service_type: 'Handicrafts',
           location: { address: 'Wang Sam Mo Craft Center' },
           featured: true,
-          price: 500 // Add actual price for cart
+          price: 500,
+          details: {
+            dimensions: '30x20 cm',
+            material: 'Natural materials',
+            producer: 'Local artisans',
+          }
         },
         {
           id: '3',
-          name: 'Local Tea',
+          name: 'Wang Sam Mo Organic Tea',
           name_thai: 'ชาท้องถิ่นวังสามหมอ',
-          description: 'Taste Wang Sam Mo\'s organic tea, grown in the hills, 200 THB/pack.',
+          description: 'Organic tea grown in the hills of Wang Sam Mo, offering a refreshing taste of nature. #ทัวร์เดอวัง',
           images: ['https://images.unsplash.com/photo-1517022812141-2362096515c9?w=400&h=300&fit=crop'],
           rating: 4.7,
           price_range: '200 THB/pack',
           service_type: 'Natural Products',
           location: { address: 'Wang Sam Mo Hills' },
           featured: true,
-          price: 200 // Add actual price for cart
+          price: 200,
+          details: {
+            weight: '100g pack',
+            caffeine_free: true,
+            packaging: 'Eco-friendly packaging',
+          }
         }
       ]);
     } catch (error) {
