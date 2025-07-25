@@ -14,6 +14,160 @@ export type Database = {
   }
   public: {
     Tables: {
+      ad_analytics: {
+        Row: {
+          advertisement_id: string | null
+          created_at: string | null
+          event_type: string
+          id: string
+          ip_address: unknown | null
+          referrer: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          advertisement_id?: string | null
+          created_at?: string | null
+          event_type: string
+          id?: string
+          ip_address?: unknown | null
+          referrer?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          advertisement_id?: string | null
+          created_at?: string | null
+          event_type?: string
+          id?: string
+          ip_address?: unknown | null
+          referrer?: string | null
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ad_analytics_advertisement_id_fkey"
+            columns: ["advertisement_id"]
+            isOneToOne: false
+            referencedRelation: "advertisements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ad_subscriptions: {
+        Row: {
+          advertisement_id: string | null
+          amount_thb: number
+          created_at: string | null
+          current_period_end: string | null
+          current_period_start: string | null
+          id: string
+          plan_type: string
+          status: string
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          advertisement_id?: string | null
+          amount_thb: number
+          created_at?: string | null
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          plan_type: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          advertisement_id?: string | null
+          amount_thb?: number
+          created_at?: string | null
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          plan_type?: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ad_subscriptions_advertisement_id_fkey"
+            columns: ["advertisement_id"]
+            isOneToOne: false
+            referencedRelation: "advertisements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      advertisements: {
+        Row: {
+          business_name: string
+          clicks: number | null
+          created_at: string | null
+          description: string
+          description_thai: string | null
+          end_date: string | null
+          id: string
+          image_url: string | null
+          link_url: string
+          plan_type: string
+          start_date: string | null
+          status: string
+          title: string
+          title_thai: string | null
+          updated_at: string | null
+          user_id: string | null
+          video_url: string | null
+          views: number | null
+        }
+        Insert: {
+          business_name: string
+          clicks?: number | null
+          created_at?: string | null
+          description: string
+          description_thai?: string | null
+          end_date?: string | null
+          id?: string
+          image_url?: string | null
+          link_url: string
+          plan_type: string
+          start_date?: string | null
+          status?: string
+          title: string
+          title_thai?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+          video_url?: string | null
+          views?: number | null
+        }
+        Update: {
+          business_name?: string
+          clicks?: number | null
+          created_at?: string | null
+          description?: string
+          description_thai?: string | null
+          end_date?: string | null
+          id?: string
+          image_url?: string | null
+          link_url?: string
+          plan_type?: string
+          start_date?: string | null
+          status?: string
+          title?: string
+          title_thai?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+          video_url?: string | null
+          views?: number | null
+        }
+        Relationships: []
+      }
       attractions: {
         Row: {
           category: Database["public"]["Enums"]["attraction_category"]
@@ -400,7 +554,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      expire_ads: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       attraction_category:
